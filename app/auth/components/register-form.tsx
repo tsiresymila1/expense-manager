@@ -14,19 +14,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as zod from "zod";
+import * as z from "zod";
 
 export type RegisterInput = { name: string; email: string; password: string };
 
-const schema = zod.object({
-    name: zod.string(),
-    email: zod.string().email("Invalid email"),
-    password: zod
+const schema = z.object({
+    name: z.string(),
+    email: z.string().email("Invalid email"),
+    password: z
         .string({
             required_error: "Password required"
         })
         .min(6, "Password must be at least 6 characters"),
-    confirm_password: zod
+    confirm_password: z
         .string({
             required_error: "COnfirmation password required"
         })
@@ -51,7 +51,6 @@ export default function RegisterForm() {
     const router = useRouter();
 
     const onSubmit = async (data: RegisterInput) => {
-        console.log("data:", data)
         const res = await authClient.signUp.email({
             email: data.email,
             password: data.password,

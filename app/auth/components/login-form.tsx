@@ -13,11 +13,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as zod from "zod";
+import * as z from "zod";
 
-const schema = zod.object({
-    email: zod.string().email("Invalid email"),
-    password: zod.string().min(6, "Password must be at least 6 characters"),
+const schema = z.object({
+    email: z.string().email("Invalid email"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 export default function LoginForm() {
