@@ -68,7 +68,7 @@ export default function RegisterForm() {
         } else {
             setError(null);
             setSuccess("Logged")
-            router.push("/auth/login");
+            router.push("/");
         }
     };
 
