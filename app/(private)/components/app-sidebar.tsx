@@ -1,0 +1,111 @@
+"use client"
+import { Briefcase, ChartArea, HelpCircle, Home, LucideIcon, Settings, User, Users2 } from "lucide-react"
+
+import { Label } from "@/components/ui/label"
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from "@/components/ui/sidebar"
+import { usePathname } from "next/navigation"
+
+
+type SideMenuType = {
+    title: string,
+    url: string,
+    children: {
+        title: string,
+        url: string,
+        icon: LucideIcon,
+    }[]
+
+}
+// Menu items.
+const items: SideMenuType[] = [
+    {
+        title: "Application",
+        url: '',
+        children: [
+            {
+                title: "Home",
+                url: "",
+                icon: Home,
+            },
+            {
+                title: "Projects",
+                url: "/project",
+                icon: Briefcase,
+            },
+            {
+                title: "Users",
+                url: "/users",
+                icon: Users2,
+            },
+
+            {
+                title: "Activity",
+                url: "/activity",
+                icon: ChartArea,
+            },
+        ]
+    },
+    {
+        title: "Settings",
+        url: '/admin',
+        children: [
+            {
+                title: "Settings",
+                url: "#",
+                icon: Settings,
+            },
+            {
+                title: "Help",
+                url: "#",
+                icon: HelpCircle,
+            }
+        ]
+    },
+]
+
+export function AppSidebar() {
+    const pathname = usePathname()
+    return (
+        <Sidebar>
+            <SidebarHeader className="py-4 ps-8">
+                <div className="flex flex-row items-center gap-4">
+                    <User size={20} />
+                    <Label className="font-bold text-md uppercase">Admin panel</Label>
+                </div>
+            </SidebarHeader>
+            <SidebarContent className="px-4 mt-4">
+                {items.map((item, index) => {
+                    return <SidebarGroup key={`group-item-${index}`}>
+                        <SidebarGroupLabel className="font-bold">{item.title}</SidebarGroupLabel>
+                        <SidebarGroupContent className="flex gap-4">
+                            <SidebarMenu>
+                                {item.children.map((menu, index2) => {
+                                    const url = `${item.url}${menu.url}`
+                                    return (<SidebarMenuItem key={`item-${index}-${index2}`} className="my-1">
+                                        <SidebarMenuButton isActive={pathname === url} asChild className="py-2">
+                                            <a href={url} className="flex gap-5">
+                                                <menu.icon />
+                                                <span>{menu.title}</span>
+                                            </a>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>)
+                                })}
+                            </SidebarMenu>
+                        </SidebarGroupContent>
+                    </SidebarGroup>
+                })}
+
+            </SidebarContent>
+        </Sidebar>
+    )
+}

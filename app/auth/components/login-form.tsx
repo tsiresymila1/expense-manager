@@ -35,16 +35,9 @@ export default function LoginForm() {
         const res = await authClient.signIn.email({
             email: data.email,
             password: data.password,
-            fetchOptions: {
-                onSuccess: (res) => {
-                    console.log("sucess:::", res.response.headers);
-                }
-            }
-            // callbackURL: "/",
+            callbackURL: "/",
         });
-
         if (res?.error) setError("Invalid credentials");
-        // else router.replace("/");
     };
 
 
@@ -54,7 +47,7 @@ export default function LoginForm() {
                 <div className="py-4 w-full">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl">Welcome back</CardTitle>
-                        <CardDescription>Login to your AI Bot Scapper account</CardDescription>
+                        <CardDescription>Login to your Expense Manager account</CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
                         {error && <FormError>{error}</FormError>}

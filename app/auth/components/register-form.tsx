@@ -77,7 +77,7 @@ export default function RegisterForm() {
                 <div className=" py-8">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl">Create new account</CardTitle>
-                        <CardDescription>Enter your information for your AI Bot Scapper account </CardDescription>
+                        <CardDescription>Enter your information for your Expense Manager account </CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
                         {error && <FormError>{error}</FormError>}

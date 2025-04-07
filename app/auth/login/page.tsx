@@ -4,7 +4,6 @@ import LoginForm from "../components/login-form";
 
 export default function LoginPage() {
     return <div className="lg:w-[800px] max-lg:max-w-[400px]  flex dark:bg-slate-950 bg-slate-100 w-full rounded-md">
-
         <div className="flex-1 p-8 dark:bg-[rgb(16,25,45)] dark:bg-opacity-100 border border-l-0 bg-slate-200 flex flex-col justify-center items-center max-lg:hidden">
             <DollarSign size={80} />
             <Label className="font-bold text-2xl pt-3">Expense Manager</Label>
