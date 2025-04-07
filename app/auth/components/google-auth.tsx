@@ -6,7 +6,7 @@ export default function GoogleAuthButton() {
     return <div className="w-full flex items-center justify-between">
         <Button
             variant="outline"
-            type="submit"
+            type="button"
             className="w-full gap-2 border border-gray-300"
             onClick={async () => {
                 const res = await authClient.signIn.social({

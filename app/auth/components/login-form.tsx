@@ -3,6 +3,7 @@
 import FormError from "@/components/form-error";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -18,6 +19,11 @@ import GoogleAuthButton from "./google-auth";
 const schema = z.object({
     email: z.string().email("Invalid email"),
     password: z.string().min(6, "Password must be at least 6 characters"),
+    cgu: z.boolean({
+        message: "You must accept the terms and conditions",
+    }).refine((val) => val === true, {
+        message: "You must accept the terms and conditions",
+    })
 });
 
 export default function LoginForm() {
@@ -25,13 +31,14 @@ export default function LoginForm() {
         register,
         handleSubmit,
         formState: { errors },
+        setValue
     } = useForm({
         resolver: zodResolver(schema),
     });
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const onSubmit = async (data: { email: string; password: string }) => {
+    const onSubmit = async (data: z.infer<typeof schema>) => {
         const res = await authClient.signIn.email({
             email: data.email,
             password: data.password,
@@ -74,16 +81,32 @@ export default function LoginForm() {
                                     </div>
                                     {errors.password && <FormError>{errors.password.message}</FormError>}
                                 </div>
+                                <div className="flex flex-col gap-2">
+                                    <div className="relative w-full flex  gap-3 items-center ">
+                                        <Checkbox name="cgu" onCheckedChange={(checked) => {
+                                            if (checked) {
+                                                setValue("cgu", true);
+                                            }
+                                            else {
+                                                setValue("cgu", false);
+                                            }
+                                            return checked;
+                                        }} />
+                                        <div className="text-sm">I agree the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>
+                                        </div>
+                                    </div>
+                                    {errors.cgu && <FormError>{errors.cgu.message}</FormError>}
+                                </div>
                             </div>
                             <Button type="submit">Login</Button>
                         </form>
-                        <div className="w-full flex items-center justify-between">
-                            <GoogleAuthButton />
-                        </div>
                         <div className="flex gap-4 justify-center items-center">
                             <Separator className="flex-1" />
                             <Label>OR</Label>
                             <Separator className="flex-1" />
+                        </div>
+                        <div className="w-full flex items-center justify-between">
+                            <GoogleAuthButton />
                         </div>
                         <div className="flex justify-center items-center gap-1">
                             <Label>Don&apos;t have an account? </Label>

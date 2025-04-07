@@ -4,6 +4,7 @@ import FormError from "@/components/form-error";
 import FormSuccess from "@/components/form-success";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -15,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import GoogleAuthButton from "./google-auth";
 
 export type RegisterInput = { name: string; email: string; password: string };
 
@@ -29,7 +31,12 @@ const schema = z.object({
     confirm_password: z
         .string({
             required_error: "COnfirmation password required"
-        })
+        }),
+    cgu: z.boolean({
+        message: "You must accept the terms and conditions",
+    }).refine((val) => val === true, {
+        message: "You must accept the terms and conditions",
+    })
 }).refine((data) => data.password === data.confirm_password, {
     message: "Password not confirm"
     , path: ["confirm_password"]
@@ -40,6 +47,7 @@ export default function RegisterForm() {
         register,
         handleSubmit,
         formState: { errors },
+        setValue
     } = useForm({
         resolver: zodResolver(schema),
     });
@@ -110,6 +118,22 @@ export default function RegisterForm() {
                                 <Input {...register("confirm_password")} autoComplete="off" type={showPassword ? "text" : "password"} placeholder="Confirm password" />
                                 {errors.confirm_password && <FormError>{errors.confirm_password.message}</FormError>}
                             </div>
+                            <div className="flex flex-col gap-2">
+                                <div className="relative w-full flex  gap-3 items-center ">
+                                    <Checkbox name="cgu" onCheckedChange={(checked) => {
+                                        if (checked) {
+                                            setValue("cgu", true);
+                                        }
+                                        else {
+                                            setValue("cgu", false);
+                                        }
+                                        return checked;
+                                    }} />
+                                    <div className="text-sm">I agree the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>
+                                    </div>
+                                </div>
+                                {errors.cgu && <FormError>{errors.cgu.message}</FormError>}
+                            </div>
                         </div>
                         <Button type="submit" disabled={loading} className="w-full">
                             {loading ? "Registering..." : "Register"}
@@ -118,6 +142,9 @@ export default function RegisterForm() {
                             <Separator className="flex-1" />
                             <Label>OR</Label>
                             <Separator className="flex-1" />
+                        </div>
+                        <div className="w-full flex items-center justify-between">
+                            <GoogleAuthButton />
                         </div>
                         <div className="flex justify-center items-center gap-1">
                             <Label>Have already an account? </Label>
