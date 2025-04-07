@@ -4,7 +4,7 @@ import { CurrentUser, type User } from "../../decorator";
 // Define GraphQL Object Type
 @ObjectType()
 @Resolver()
-@Authorized()
+@Authorized('auth')
 export class AppResolver {
   @Query(() => String)
   test(@CurrentUser() user: User): string {

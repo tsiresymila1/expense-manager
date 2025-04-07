@@ -10,10 +10,10 @@ import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import GoogleAuthButton from "./google-auth";
 
 const schema = z.object({
     email: z.string().email("Invalid email"),
@@ -28,8 +28,6 @@ export default function LoginForm() {
     } = useForm({
         resolver: zodResolver(schema),
     });
-
-    const router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -37,16 +35,22 @@ export default function LoginForm() {
         const res = await authClient.signIn.email({
             email: data.email,
             password: data.password,
-            callbackURL: "/"
+            fetchOptions: {
+                onSuccess: (res) => {
+                    console.log("sucess:::", res.response.headers);
+                }
+            }
+            // callbackURL: "/",
         });
 
         if (res?.error) setError("Invalid credentials");
-        else router.replace("/");
+        // else router.replace("/");
     };
+
 
     return (
         <div className="flex flex-col items-center justify-center w-full">
-            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="space-y-4 w-full">
+            <div className="space-y-4 w-full">
                 <div className="py-4 w-full">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl">Welcome back</CardTitle>
@@ -54,30 +58,35 @@ export default function LoginForm() {
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
                         {error && <FormError>{error}</FormError>}
-                        <div className="flex flex-col gap-6">
-                            <div className="flex flex-col gap-2">
-                                <Label>Email</Label>
-                                <Input {...register("email")} autoComplete="off" type="email" placeholder="Email" />
-                                {errors.email && <FormError>{errors.email.message}</FormError>}
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <Label>Password</Label>
-                                <div className="relative w-full">
-                                    <Input {...register("password")} autoComplete="off" type={showPassword ? "text" : "password"} placeholder="Password" />
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        size="icon"
-                                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2"
-                                        onClick={() => setShowPassword((prev) => !prev)}
-                                    >
-                                        {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                                    </Button>
+                        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="gap-6 flex flex-col" >
+                            <div className="flex flex-col gap-6">
+                                <div className="flex flex-col gap-2">
+                                    <Label>Email</Label>
+                                    <Input {...register("email")} autoComplete="off" type="email" placeholder="Email" />
+                                    {errors.email && <FormError>{errors.email.message}</FormError>}
                                 </div>
-                                {errors.password && <FormError>{errors.password.message}</FormError>}
+                                <div className="flex flex-col gap-2">
+                                    <Label>Password</Label>
+                                    <div className="relative w-full">
+                                        <Input {...register("password")} autoComplete="off" type={showPassword ? "text" : "password"} placeholder="Password" />
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            size="icon"
+                                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2"
+                                            onClick={() => setShowPassword((prev) => !prev)}
+                                        >
+                                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                        </Button>
+                                    </div>
+                                    {errors.password && <FormError>{errors.password.message}</FormError>}
+                                </div>
                             </div>
+                            <Button type="submit">Login</Button>
+                        </form>
+                        <div className="w-full flex items-center justify-between">
+                            <GoogleAuthButton />
                         </div>
-                        <Button type="submit">Login</Button>
                         <div className="flex gap-4 justify-center items-center">
                             <Separator className="flex-1" />
                             <Label>OR</Label>
@@ -91,7 +100,7 @@ export default function LoginForm() {
                         </div>
                     </CardContent>
                 </div>
-            </form>
+            </div>
         </div>
     );
 }

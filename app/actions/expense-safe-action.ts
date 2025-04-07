@@ -7,7 +7,7 @@ import { headers } from "next/headers";
 import * as z from "zod";
 
 class ActionError extends Error {}
-export const expenseSafeAction = createSafeActionClient({
+export const appSafeAction = createSafeActionClient({
   defineMetadataSchema() {
     return z.object({
       actionName: z.string(),
@@ -19,12 +19,14 @@ export const expenseSafeAction = createSafeActionClient({
     }
     return DEFAULT_SERVER_ERROR_MESSAGE;
   },
-}).use(async ({ next }) => {
+});
+
+export const securedSafeAction = appSafeAction.use(async (p) => {
   const user = await auth.api.getSession({
     headers: await headers(),
   });
   if (user?.user && user?.session) {
-    return next();
+    return p.next();
   } else {
     throw new ActionError("Not authorized");
   }

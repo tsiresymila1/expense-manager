@@ -28,6 +28,8 @@ export default function RootLayout({
       lang="en"
       data-theme="dark"
       style={{ colorScheme: "dark" }}
+      suppressHydrationWarning
+      data-lt-installed="true"
     >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

@@ -1,22 +1,24 @@
+
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id            String     @id @default(uuid())
-  email         String     @unique
+  id            String   @id @default(cuid())
+  email         String   @unique
   name          String?
   emailVerified Boolean  @default(false)
   image         String?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  expenses      Expense[]
-  categories    Category[]
+  expenses   Expense[]
+  categories Category[]
 
   sessions Session[]
   accounts Account[]
@@ -25,7 +27,7 @@ model User {
 }
 
 model Expense {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   amount      Float
   description String
   date        DateTime
@@ -42,7 +44,7 @@ model Expense {
 }
 
 model Category {
-  id        String    @id @default(uuid())
+  id        String    @id @default(cuid())
   name      String
   color     String?
   createdAt DateTime  @default(now())
@@ -57,7 +59,7 @@ model Category {
 }
 
 model Session {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   expiresAt DateTime
   token     String
   createdAt DateTime
@@ -72,7 +74,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id @default(cuid())
   accountId             String
   providerId            String
   userId                String
@@ -91,7 +93,7 @@ model Account {
 }
 
 model Verification {
-  id         String    @id
+  id         String    @id @default(cuid())
   identifier String
   value      String
   expiresAt  DateTime
@@ -99,4 +101,13 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model Jwks {
+  id         String   @id @default(cuid())
+  publicKey  String
+  privateKey String
+  createdAt  DateTime
+
+  @@map("jwks")
 }
