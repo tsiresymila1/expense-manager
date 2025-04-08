@@ -3,10 +3,10 @@ import { BarChart3, CreditCard, TrendingDown, TrendingUp, Wallet } from "lucide-
 
 // Mock data for dashboard statistics
 const mockStats = {
-    totalExpenses: "₹24,500",
-    monthlyAvg: "₹4,200",
+    totalExpenses: "€24,500",
+    monthlyAvg: "€4,200",
     highestCategory: "Groceries",
-    recentExpense: "₹1,200"
+    recentExpense: "€1,200"
 };
 
 // Mock data for expense breakdown

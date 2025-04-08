@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const CTASection = () => {
   return (
@@ -14,10 +15,12 @@ const CTASection = () => {
           Start your journey to financial wellness today!
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="bg-white text-expense-700 hover:bg-white/90">
-            Start For Free
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/dashboard">
+            <Button size="lg" className="bg-white text-expense-700 hover:bg-white/90">
+              Start For Free
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
           <Button variant="outline" size="lg" className="bg-transparent text-white hover:bg-white/80 hover:text-expense-700">
             Learn More
           </Button>

@@ -1,7 +1,7 @@
 
-import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BarChart3, PieChart, Wallet, TrendingUp, Settings } from "lucide-react";
+import { ArrowRight, BarChart3, PieChart, Settings, TrendingUp, Wallet } from "lucide-react";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -16,10 +16,12 @@ const HeroSection = () => {
               Take control of your finances with ExpenseFlow – the all-in-one expense tracking solution that helps you save more, spend wisely, and achieve your financial goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="text-base bg-home text-white hover:bg-home/80">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <Link href="/dashboard">
+                <Button size="lg" className="text-base bg-home text-white hover:bg-home/80">
+                  Get Started
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
               <Button variant="outline" size="lg" className="text-base">
                 Learn More
               </Button>

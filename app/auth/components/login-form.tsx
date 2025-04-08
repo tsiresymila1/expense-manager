@@ -42,7 +42,7 @@ export default function LoginForm() {
         const res = await authClient.signIn.email({
             email: data.email,
             password: data.password,
-            callbackURL: "/",
+            callbackURL: "/dashboard",
         });
         if (res?.error) setError("Invalid credentials");
     };
@@ -92,13 +92,13 @@ export default function LoginForm() {
                                             }
                                             return checked;
                                         }} />
-                                        <div className="text-sm">I agree the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>
+                                        <div className="text-sm">I agree the <a href="/privacy-policy" className="text-expense-600">Privacy Policy</a> and <a href="/terms" className="text-expense-600">Terms of Service</a>
                                         </div>
                                     </div>
                                     {errors.cgu && <FormError>{errors.cgu.message}</FormError>}
                                 </div>
                             </div>
-                            <Button type="submit" className="bg-expense-600 hover:bg-expense-700">Login</Button>
+                            <Button type="submit" className="bg-expense-600 hover:bg-expense-700 text-white">Login</Button>
                         </form>
                         <div className="flex gap-4 justify-center items-center">
                             <Separator className="flex-1" />
@@ -110,8 +110,8 @@ export default function LoginForm() {
                         </div>
                         <div className="flex justify-center items-center gap-1">
                             <Label>Don&apos;t have an account? </Label>
-                            <Link className="underline cursor-pointer" href="/auth/register">
-                                <Label className="cursor-pointer text-expense-600">Sign up</Label>
+                            <Link className="underline cursor-pointer text-expense-600" href="/auth/register">
+                                <Label className="cursor-pointer ">Sign up</Label>
                             </Link>
                         </div>
                     </CardContent>

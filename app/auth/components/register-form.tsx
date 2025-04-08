@@ -63,7 +63,7 @@ export default function RegisterForm() {
             email: data.email,
             password: data.password,
             name: data.name,
-            callbackURL: "/",
+            callbackURL: "/dashboard",
             fetchOptions: {
                 method: "POST"
             }
@@ -75,7 +75,7 @@ export default function RegisterForm() {
         } else {
             setError(null);
             setSuccess("Logged")
-            router.push("/");
+            router.push("/dashboard");
         }
     };
 
@@ -129,13 +129,13 @@ export default function RegisterForm() {
                                         }
                                         return checked;
                                     }} />
-                                    <div className="text-sm">I agree the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>
+                                    <div className="text-sm">I agree the <a href="/privacy-policy" className="text-expense-600">Privacy Policy</a> and <a href="/terms" className="text-expense-600">Terms of Service</a>
                                     </div>
                                 </div>
                                 {errors.cgu && <FormError>{errors.cgu.message}</FormError>}
                             </div>
                         </div>
-                        <Button type="submit" disabled={loading} className="w-full bg-expense-600 hover:bg-expense-700">
+                        <Button type="submit" disabled={loading} className="w-full bg-expense-600 hover:bg-expense-700 text-white">
                             {loading ? "Registering..." : "Register"}
                         </Button>
                         <div className="flex gap-4 justify-center items-center">
@@ -148,8 +148,8 @@ export default function RegisterForm() {
                         </div>
                         <div className="flex justify-center items-center gap-1">
                             <Label>Have already an account? </Label>
-                            <Link className="underline cursor-pointer" href="/auth/login">
-                                <Label className="cursor-pointe text-expense-600r">Log in</Label>
+                            <Link className="underline cursor-pointer text-expense-600" href="/auth/login">
+                                <Label className="cursor-pointer ">Log in</Label>
                             </Link>
                         </div>
                     </CardContent>

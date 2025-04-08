@@ -1,4 +1,6 @@
+import { getUser } from "@/app/actions/get-user"
 import LogoutButton from "@/components/logout-button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -16,12 +18,18 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { UserCircle2 } from "lucide-react"
 
-export function ProfileButton() {
+export async function ProfileButton() {
+    const user = await getUser()
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild className="focus:ring-0 focus:outline-none active:ring-0 active:outline-none">
                 <Button variant="ghost" size="icon" className="focus:ring-0 focus:outline-none active:ring-0 active:outline-none">
-                    <UserCircle2 className="text-expense-600" />
+                    <Avatar className="w-7 h-7">
+                        <AvatarImage src={user?.image ?? ''} className="object-center object-contain" />
+                        <AvatarFallback>
+                            <UserCircle2 />
+                        </AvatarFallback>
+                    </Avatar>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">

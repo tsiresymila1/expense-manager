@@ -95,7 +95,7 @@ export function AppSidebar() {
             <SidebarContent className="px-4 mt-4">
                 {items.map((item, index) => {
                     return <SidebarGroup key={`group-item-${index}`}>
-                        <SidebarGroupLabel className="font-bold text-expense-900/80">{item.title}</SidebarGroupLabel>
+                        <SidebarGroupLabel className="font-bold text-expense-600/80">{item.title}</SidebarGroupLabel>
                         <SidebarGroupContent className="flex gap-4">
                             <SidebarMenu>
                                 {item.children.map((menu, index2) => {

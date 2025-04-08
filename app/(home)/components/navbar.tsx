@@ -65,7 +65,7 @@ export default async function NavBar() {
                     <Button variant="outline">Log In</Button>
                   </Link>
                   <Link href="/auth/register">
-                    <Button className="text-white bg-home">Sign Up</Button>
+                    <Button className="text-white bg-expense-600 hover:bg-expense-800">Sign Up</Button>
                   </Link>
                 </>}
               </div>
@@ -86,7 +86,7 @@ export default async function NavBar() {
               <Button variant="outline">Log In</Button>
             </Link>
             <Link href="/auth/register">
-              <Button className="text-white bg-home">Sign Up</Button>
+            <Button className="text-white bg-expense-600 hover:bg-expense-800">Sign Up</Button>
             </Link>
           </>}
         </div>
