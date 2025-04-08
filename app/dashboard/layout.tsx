@@ -4,6 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/app-sidebar";
 import AppBar from "./components/appbar";
+import { AppBreadcrumb } from "./components/breadcrumb";
 
 export const metadata: Metadata = {
     title: "Tsiresy Milà - Software Engineer",
@@ -21,7 +22,8 @@ export default function AppLayout({
             <AppSidebar />
             <main className="w-full flex flex-col gap-4 relative h-screen overflow-hidden">
                 <AppBar />
-                <ScrollArea className="w-full flex flex-col relative ">
+                <ScrollArea className="w-full flex flex-col relative px-12 pt-6  overflow-auto">
+                    <AppBreadcrumb />
                     {children}
                 </ScrollArea>
             </main>

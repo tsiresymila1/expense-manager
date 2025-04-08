@@ -21,7 +21,7 @@ export function ProfileButton() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild className="focus:ring-0 focus:outline-none active:ring-0 active:outline-none">
                 <Button variant="ghost" size="icon" className="focus:ring-0 focus:outline-none active:ring-0 active:outline-none">
-                    <UserCircle2 />
+                    <UserCircle2 className="text-expense-600" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">

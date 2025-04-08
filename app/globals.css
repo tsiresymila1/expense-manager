@@ -61,6 +61,18 @@
       height: 0;
     }
   }
+  --color-expense-50: #f0fbfa;
+  --color-expense-100: #d0f3f0;
+  --color-expense-200: #a2e8e4;
+  --color-expense-300: #68d6cf;
+  --color-expense-400: #38bdb7;
+  --color-expense-500: #1c9f9a;
+  --color-expense-600: #0e7f7e;
+  --color-expense-700: #0c6866;
+  --color-expense-800: #0c5352;
+  --color-expense-900: #0b4544;
+  --color-expense-950: #022b2a;
+  --color-home: #178279;
 }
 
 :root {
@@ -137,6 +149,18 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer components {
+  .hero-text-gradient {
+    @apply bg-gradient-to-r bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      to right,
+      theme("colors.expense-600"),
+      theme("colors.expense-500"),
+      theme("colors.expense-400")
+    );
   }
 }

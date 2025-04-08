@@ -84,7 +84,7 @@ export default function RegisterForm() {
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="space-y-4 w-full max-w-96">
                 <div className=" py-8">
                     <CardHeader className="text-center">
-                        <CardTitle className="text-2xl">Create new account</CardTitle>
+                        <CardTitle className="text-2xl text-expense-600">Create new account</CardTitle>
                         <CardDescription>Enter your information for your Expense Manager account </CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
@@ -135,7 +135,7 @@ export default function RegisterForm() {
                                 {errors.cgu && <FormError>{errors.cgu.message}</FormError>}
                             </div>
                         </div>
-                        <Button type="submit" disabled={loading} className="w-full">
+                        <Button type="submit" disabled={loading} className="w-full bg-expense-600 hover:bg-expense-700">
                             {loading ? "Registering..." : "Register"}
                         </Button>
                         <div className="flex gap-4 justify-center items-center">
@@ -149,7 +149,7 @@ export default function RegisterForm() {
                         <div className="flex justify-center items-center gap-1">
                             <Label>Have already an account? </Label>
                             <Link className="underline cursor-pointer" href="/auth/login">
-                                <Label className="cursor-pointer">Log in</Label>
+                                <Label className="cursor-pointe text-expense-600r">Log in</Label>
                             </Link>
                         </div>
                     </CardContent>

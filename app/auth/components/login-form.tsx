@@ -53,7 +53,7 @@ export default function LoginForm() {
             <div className="space-y-4 w-full">
                 <div className="py-4 w-full">
                     <CardHeader className="text-center">
-                        <CardTitle className="text-2xl">Welcome back</CardTitle>
+                        <CardTitle className="text-2xl text-expense-600">Welcome back</CardTitle>
                         <CardDescription>Login to your Expense Manager account</CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
@@ -98,7 +98,7 @@ export default function LoginForm() {
                                     {errors.cgu && <FormError>{errors.cgu.message}</FormError>}
                                 </div>
                             </div>
-                            <Button type="submit">Login</Button>
+                            <Button type="submit" className="bg-expense-600 hover:bg-expense-700">Login</Button>
                         </form>
                         <div className="flex gap-4 justify-center items-center">
                             <Separator className="flex-1" />
@@ -111,7 +111,7 @@ export default function LoginForm() {
                         <div className="flex justify-center items-center gap-1">
                             <Label>Don&apos;t have an account? </Label>
                             <Link className="underline cursor-pointer" href="/auth/register">
-                                <Label className="cursor-pointer">Sign up</Label>
+                                <Label className="cursor-pointer text-expense-600">Sign up</Label>
                             </Link>
                         </div>
                     </CardContent>

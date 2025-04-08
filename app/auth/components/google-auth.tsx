@@ -7,7 +7,7 @@ export default function GoogleAuthButton() {
         <Button
             variant="outline"
             type="button"
-            className="w-full gap-2 border border-gray-300"
+            className="w-full gap-2 border border-expense-500"
             onClick={async () => {
                 const res = await authClient.signIn.social({
                     provider: "google",
