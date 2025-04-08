@@ -54,7 +54,7 @@ export default function LoginForm() {
                 <div className="py-4 w-full">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl text-expense-600">Welcome back</CardTitle>
-                        <CardDescription>Login to your Expense Manager account</CardDescription>
+                        <CardDescription>Login to your ExpenseFlow account</CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
                         {error && <FormError>{error}</FormError>}

@@ -28,8 +28,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Expense Manager",
-  description: "Manage your expense",
+  title: "ExpenseFlow",
+  description: "Take control of your finances with ExpenseFlow – the all-in-one expense tracking solution that helps you save more, spend wisely, and achieve your financial goals.",
 };
 
 export default function RootLayout({

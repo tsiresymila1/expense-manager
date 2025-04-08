@@ -85,7 +85,7 @@ export default function RegisterForm() {
                 <div className=" py-8">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl text-expense-600">Create new account</CardTitle>
-                        <CardDescription>Enter your information for your Expense Manager account </CardDescription>
+                        <CardDescription>Enter your information for your ExpenseFlow account </CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
                         {error && <FormError>{error}</FormError>}
