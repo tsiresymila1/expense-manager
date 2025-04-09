@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 import GoogleAuthButton from "./google-auth";
 
@@ -52,7 +53,6 @@ export default function RegisterForm() {
         resolver: zodResolver(schema),
     });
 
-    const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -70,10 +70,11 @@ export default function RegisterForm() {
         });
         setLoading(false);
         if (res?.error?.message) {
-            setError(res.error.message);
+            toast.error("Invalid credentials", {
+                description: `${res.error.message}`
+            })
             setSuccess(null);
         } else {
-            setError(null);
             setSuccess("Logged")
             router.push("/dashboard");
         }
@@ -88,7 +89,6 @@ export default function RegisterForm() {
                         <CardDescription>Enter your information for your ExpenseFlow account </CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
-                        {error && <FormError>{error}</FormError>}
                         {success && <FormSuccess>{success}</FormSuccess>}
                         <div className="flex flex-col gap-4">
                             <div>
@@ -138,6 +138,12 @@ export default function RegisterForm() {
                         <Button type="submit" disabled={loading} className="w-full bg-expense-600 hover:bg-expense-700 text-white">
                             {loading ? "Registering..." : "Register"}
                         </Button>
+                        <div className="flex justify-center items-center gap-1">
+                            <Label>Have already an account? </Label>
+                            <Link className="underline cursor-pointer text-expense-600" href="/auth/login">
+                                <Label className="cursor-pointer ">Log in</Label>
+                            </Link>
+                        </div>
                         <div className="flex gap-4 justify-center items-center">
                             <Separator className="flex-1" />
                             <Label>OR</Label>
@@ -146,12 +152,7 @@ export default function RegisterForm() {
                         <div className="w-full flex items-center justify-between">
                             <GoogleAuthButton />
                         </div>
-                        <div className="flex justify-center items-center gap-1">
-                            <Label>Have already an account? </Label>
-                            <Link className="underline cursor-pointer text-expense-600" href="/auth/login">
-                                <Label className="cursor-pointer ">Log in</Label>
-                            </Link>
-                        </div>
+
                     </CardContent>
                 </div>
             </form>

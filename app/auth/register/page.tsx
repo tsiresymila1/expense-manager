@@ -18,7 +18,7 @@ export default async function RegisterPage() {
                     <Label className="font-bold text-4xl hero-text-gradient cursor-pointer">ExpenseFlow</Label>
                 </Link>
             </div>
-            <div className="max-w-96 justify-center flex p-8 text-center">
+            <div className="max-w-lg justify-center flex p-8 text-center">
                 <Label className="text-base text-muted-foreground">
                     {"Take control of your finances with ExpenseFlow – the all-in-one expense tracking solution that helps you save more, spend wisely, and achieve your financial goals."}
                 </Label>

@@ -13,6 +13,7 @@ import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 import GoogleAuthButton from "./google-auth";
 
@@ -36,7 +37,6 @@ export default function LoginForm() {
         resolver: zodResolver(schema),
     });
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     const onSubmit = async (data: z.infer<typeof schema>) => {
         const res = await authClient.signIn.email({
@@ -44,7 +44,11 @@ export default function LoginForm() {
             password: data.password,
             callbackURL: "/dashboard",
         });
-        if (res?.error) setError("Invalid credentials");
+        if (res?.error) {
+            toast.error("Invalid credentials", {
+                description: `${res.error.message}`
+            })
+        }
     };
 
 
@@ -57,7 +61,7 @@ export default function LoginForm() {
                         <CardDescription>Login to your ExpenseFlow account</CardDescription>
                     </CardHeader>
                     <CardContent className="w-auto flex flex-col gap-8 mt-6">
-                        {error && <FormError>{error}</FormError>}
+                        {/* {error && <FormError>{error}</FormError>} */}
                         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="gap-6 flex flex-col" >
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-col gap-2">
@@ -100,6 +104,12 @@ export default function LoginForm() {
                             </div>
                             <Button type="submit" className="bg-expense-600 hover:bg-expense-700 text-white">Login</Button>
                         </form>
+                        <div className="flex justify-center items-center gap-1">
+                            <Label>Don&apos;t have an account? </Label>
+                            <Link className="underline cursor-pointer text-expense-600" href="/auth/register">
+                                <Label className="cursor-pointer ">Sign up</Label>
+                            </Link>
+                        </div>
                         <div className="flex gap-4 justify-center items-center">
                             <Separator className="flex-1" />
                             <Label>OR</Label>
@@ -108,12 +118,7 @@ export default function LoginForm() {
                         <div className="w-full flex items-center justify-between">
                             <GoogleAuthButton />
                         </div>
-                        <div className="flex justify-center items-center gap-1">
-                            <Label>Don&apos;t have an account? </Label>
-                            <Link className="underline cursor-pointer text-expense-600" href="/auth/register">
-                                <Label className="cursor-pointer ">Sign up</Label>
-                            </Link>
-                        </div>
+                        
                     </CardContent>
                 </div>
             </div>

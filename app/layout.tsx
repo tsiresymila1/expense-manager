@@ -1,6 +1,8 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster, } from "@/components/ui/sonner";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, ABeeZee, Montserrat } from "next/font/google";
+import { ABeeZee, Geist, Geist_Mono, Montserrat } from "next/font/google";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,8 +24,8 @@ const abeeZee = ABeeZee({
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
-  subsets: ["latin"], 
-  display: "swap", 
+  subsets: ["latin"],
+  display: "swap",
   weight: ["400", "500", "600", "700"],
 });
 
@@ -48,7 +50,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${abeeZee.variable} ${montserrat.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>{children}</ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <Toaster position="bottom-center" richColors />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -144,7 +144,7 @@ export default function PricingPage() {
                                                 {feature.included ? (
                                                     <CheckCircle className="h-5 w-5 text-expense-500 mt-0.5" />
                                                 ) : (
-                                                    <X className="h-5 w-5 text-muted-foreground mt-0.5" />
+                                                    <X className="h-5 w-5 mt-0.5 text-destructive" />
                                                 )}
                                                 <span className={feature.included ? 'text-foreground' : 'text-muted-foreground'}>
                                                     {feature.name}
@@ -155,7 +155,7 @@ export default function PricingPage() {
                                 </CardContent>
                                 <CardFooter>
                                     <Button
-                                        className={`w-full ${plan.popular ? 'bg-expense-500 hover:bg-expense-600' : ''}`}
+                                        className={`w-full ${plan.popular ? 'bg-expense-500 hover:bg-expense-600 text-white' : ''}`}
                                         variant={plan.popular ? 'default' : 'outline'}
                                     >
                                         {plan.ctaText}

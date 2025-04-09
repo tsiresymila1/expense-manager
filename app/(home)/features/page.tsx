@@ -117,7 +117,7 @@ export default function FeaturesPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/dashboard">
-                            <Button size="lg" className="bg-expense-500 hover:bg-expense-600">
+                            <Button size="lg" className="bg-expense-500 hover:bg-expense-600 text-white">
                                 Start Free Trial
                             </Button>
                         </Link>
