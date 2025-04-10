@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { CreditCard, Download, Edit, Plus, Search, Trash, User } from "lucide-react";
 import Link from "next/link";
+import { Pagination } from "../components/pagination";
 
 // Mock data for expenses
 const mockExpenses = [
@@ -27,8 +28,8 @@ const mockExpenses = [
     { id: 5, date: "2023-04-10", description: "Restaurant", category: "Food", amount: 1500 },
     { id: 6, date: "2023-04-15", description: "Movie Tickets", category: "Entertainment", amount: 600 },
     { id: 7, date: "2023-04-20", description: "Gas Bill", category: "Utilities", amount: 300 },
-    { id: 8, date: "2023-04-25", description: "Shopping", category: "Personal", amount: 2000 },
-    { id: 9, date: "2023-04-30", description: "Mobile Recharge", category: "Utilities", amount: 500 }
+    // { id: 8, date: "2023-04-25", description: "Shopping", category: "Personal", amount: 2000 },
+    // { id: 9, date: "2023-04-30", description: "Mobile Recharge", category: "Utilities", amount: 500 }
 ];
 
 // Function to format date
@@ -78,7 +79,7 @@ export default function AdminExpenses() {
                         </div>
                     </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-6">
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -125,6 +126,7 @@ export default function AdminExpenses() {
                             ))}
                         </TableBody>
                     </Table>
+                    <Pagination totalPages={10} />
                 </CardContent>
             </Card>
         </div>
