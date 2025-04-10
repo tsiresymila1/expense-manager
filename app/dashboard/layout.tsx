@@ -5,6 +5,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/app-sidebar";
 import AppBar from "./components/appbar";
 import { AppBreadcrumb } from "./components/breadcrumb";
+import ProgressProviders from "@/components/progress";
 
 export const metadata: Metadata = {
     title: "Tsiresy Milà - Software Engineer",
@@ -18,15 +19,17 @@ export default function AppLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <SidebarProvider>
-            <AppSidebar />
-            <main className="w-full flex flex-col gap-4 relative h-screen overflow-hidden">
-                <AppBar />
-                <ScrollArea className="w-full flex flex-col relative px-12 pt-6  overflow-auto">
-                    <AppBreadcrumb />
-                    {children}
-                </ScrollArea>
-            </main>
-        </SidebarProvider>
+        <ProgressProviders>
+            <SidebarProvider>
+                <AppSidebar />
+                <main className="w-full flex flex-col gap-4 relative h-screen overflow-hidden">
+                    <AppBar />
+                    <ScrollArea className="w-full flex flex-col relative px-12 pt-6  overflow-auto">
+                        <AppBreadcrumb />
+                        {children}
+                    </ScrollArea>
+                </main>
+            </SidebarProvider>
+        </ProgressProviders>
     );
 }
