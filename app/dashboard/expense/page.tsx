@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { CreditCard, Download, Edit, Plus, Search, Trash, User } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 import { Pagination } from "../components/pagination";
 
 // Mock data for expenses
@@ -126,7 +127,9 @@ export default function AdminExpenses() {
                             ))}
                         </TableBody>
                     </Table>
-                    <Pagination totalPages={10} />
+                    <Suspense>
+                        <Pagination totalPages={10} />
+                    </Suspense>
                 </CardContent>
             </Card>
         </div>
