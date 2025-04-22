@@ -59,16 +59,16 @@ export default function FeaturesPage() {
     return (
         <main className="flex-grow">
             {/* Hero Section */}
-            <section className="bg-gradient-to-b from-background to-muted py-20 px-4">
+            <section  className="bg-gradient-to-b from-background to-muted py-20 px-4">
                 <div className="container mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                    <h1 data-aos="fade-down"className="text-4xl md:text-5xl font-bold mb-6">
                         Powerful Features for Complete <br/><span className="hero-text-gradient">Financial Control</span>
                     </h1>
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+                    <p data-aos="fade-up"className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
                         Discover all the tools and features that make ExpenseFlow the most comprehensive solution for managing your personal and business finances.
                     </p>
-                    <Link href="/pricing">
-                        <Button size="lg" className="bg-expense-500 hover:bg-expense-600 text-white">
+                    <Link  href="/pricing">
+                        <Button size="lg" data-aos="fade-up" className="bg-expense-500 hover:bg-expense-600 text-white">
                             View Pricing
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
@@ -81,7 +81,7 @@ export default function FeaturesPage() {
                 <div className="container mx-auto">
                     {featureCategories.map((category, index) => (
                         <div key={index} className="mb-20">
-                            <div className="flex flex-col md:flex-row gap-4 items-center mb-8">
+                            <div data-aos="fade-up" className="flex flex-col md:flex-row gap-4 items-center mb-8">
                                 {category.icon}
                                 <div>
                                     <h2 className="text-3xl font-bold">{category.title}</h2>
@@ -91,7 +91,7 @@ export default function FeaturesPage() {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {category.features.map((feature, featureIndex) => (
-                                    <Card key={featureIndex} className="border border-border">
+                                    <Card data-aos="zoom-in" key={featureIndex} className="border border-border">
                                         <CardContent className="py-4">
                                             <div className="flex items-start gap-3">
                                                 <CheckCircle className="h-5 w-5 text-expense-500 mt-1" />
@@ -107,15 +107,15 @@ export default function FeaturesPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="bg-muted py-12 px-4">
+            <section data-aos="fade-up"  className="bg-muted py-12 px-4">
                 <div className="container mx-auto text-center">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                    <h2 data-aos="fade-up" className="text-2xl md:text-3xl font-bold mb-4">
                         Ready to experience all these features?
                     </h2>
-                    <p className="text-lg mb-8 max-w-2xl mx-auto">
+                    <p data-aos="fade-up" className="text-lg mb-8 max-w-2xl mx-auto">
                         Start your free trial today and discover how ExpenseFlow can transform your financial management.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div data-aos="fade-up" className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/dashboard">
                             <Button size="lg" className="bg-expense-500 hover:bg-expense-600 text-white">
                                 Start Free Trial

@@ -27,7 +27,7 @@ const TestimonialsSection = () => {
   return (
     <section className="py-20 px-4 bg-secondary dark:bg-secondary/30">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <div data-aos="fade-up" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 hero-text-gradient inline-block">
             What Our Users Say
           </h2>
@@ -40,6 +40,7 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
+              data-aos="flip-left"
               className="bg-card border rounded-xl p-6 shadow-sm"
             >
               <div className="flex justify-between items-start mb-4">

@@ -81,7 +81,7 @@ export default function RegisterForm() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center w-full ">
+        <div data-aos="zoom-in" className="flex flex-col items-center justify-center w-full ">
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="space-y-4 w-full max-w-96">
                 <div className=" py-8">
                     <CardHeader className="text-center">

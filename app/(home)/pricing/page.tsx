@@ -79,17 +79,17 @@ export default function PricingPage() {
 
         <main className="flex-grow">
             {/* Hero Section */}
-            <section className="bg-gradient-to-b from-background to-muted py-20 px-4">
+            <section  className="bg-gradient-to-b from-background to-muted py-20 px-4">
                 <div className="container mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                    <h1 data-aos="fade-down" className="text-4xl md:text-5xl font-bold mb-6">
                         Simple, Transparent <span className="hero-text-gradient">Pricing</span>
                     </h1>
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
+                    <p data-aos="fade-up" className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
                         {"Choose the plan that's right for you. All plans include a 14-day free trial."}
                     </p>
 
                     {/* Billing Toggle */}
-                    <div className="flex items-center justify-center gap-3 mb-10">
+                    <div data-aos="fade-up" className="flex items-center justify-center gap-3 mb-10">
                         <span className={`text-sm ${!annualBilling ? 'font-medium text-foreground' : 'text-muted-foreground'}`}>
                             Monthly
                         </span>
@@ -115,7 +115,7 @@ export default function PricingPage() {
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         {plans.map((plan, index) => (
-                            <Card key={index} className={`border ${plan.popular ? 'border-expense-500 shadow-lg relative' : 'border-border'}`}>
+                            <Card data-aos="flip-left" key={index} className={`border ${plan.popular ? 'border-expense-500 shadow-lg relative' : 'border-border'}`}>
                                 {plan.popular && (
                                     <div className="absolute top-0 right-0 bg-expense-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
                                         Most Popular
@@ -170,28 +170,28 @@ export default function PricingPage() {
             {/* FAQ Section */}
             <section className="py-16 px-4 bg-muted">
                 <div className="container mx-auto max-w-3xl">
-                    <h2 className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+                    <h2 data-aos="fade-up" className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
 
                     <div className="space-y-6">
-                        <div>
+                        <div data-aos="zoom-in">
                             <h3 className="text-xl font-semibold mb-2">Can I change plans later?</h3>
                             <p className="text-muted-foreground">Yes! You can upgrade or downgrade your plan at any time. If you upgrade, the new rate will be prorated for the remainder of your billing cycle.</p>
                         </div>
-                        <div>
+                        <div data-aos="zoom-in">
                             <h3 className="text-xl font-semibold mb-2">Is there a free trial?</h3>
                             <p className="text-muted-foreground">Yes, all paid plans include a 14-day free trial. No credit card required to start your trial.</p>
                         </div>
-                        <div>
+                        <div data-aos="zoom-in">
                             <h3 className="text-xl font-semibold mb-2">What payment methods do you accept?</h3>
                             <p className="text-muted-foreground">We accept all major credit cards, debit cards, and PayPal.</p>
                         </div>
-                        <div>
+                        <div data-aos="zoom-in">
                             <h3 className="text-xl font-semibold mb-2">Can I cancel my subscription?</h3>
                             <p className="text-muted-foreground">
                                 {"Yes, you can cancel your subscription at any time. When you cancel, you'll still have access to your paid features until the end of your current billing period."}
                             </p>
-                        </div>
-                        <div>
+                        </div >
+                        <div data-aos="zoom-in">
                             <h3 className="text-xl font-semibold mb-2">Are there any hidden fees?</h3>
                             <p className="text-muted-foreground">No, the price you see is the price you pay. There are no setup fees, hidden charges, or additional costs.</p>
                         </div>

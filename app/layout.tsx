@@ -4,7 +4,10 @@ import type { Metadata } from "next";
 import { ABeeZee, Geist, Geist_Mono, Montserrat } from "next/font/google";
 
 
+import Aos from "@/components/aos";
 import "./globals.css";
+import 'aos/dist/aos.css';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,7 +55,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${abeeZee.variable} ${montserrat.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+
           {children}
+          <Aos />
         </ThemeProvider>
         <Toaster position="bottom-center" richColors />
       </body>

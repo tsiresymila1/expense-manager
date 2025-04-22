@@ -86,16 +86,16 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarHeader className="py-4 ps-8">
                 <Link href="/" className="cursor-pointer">
-                    <div className="flex flex-row items-center gap-2">
+                    <div className="flex flex-row items-center gap-2 cursor-pointer">
                         <BarChart3 size={25} className="text-expense-600" />
-                        <Label className="font-bold text-xl">ExpenseFlow</Label>
+                        <Label  className="font-bold text-xl cursor-pointer">ExpenseFlow</Label>
                     </div>
                 </Link>
             </SidebarHeader>
             <SidebarContent className="px-4 mt-4">
                 {items.map((item, index) => {
                     return <SidebarGroup key={`group-item-${index}`}>
-                        <SidebarGroupLabel className="font-bold text-expense-600/80">{item.title}</SidebarGroupLabel>
+                        <SidebarGroupLabel  className="font-bold text-expense-600/80">{item.title}</SidebarGroupLabel>
                         <SidebarGroupContent className="flex gap-4">
                             <SidebarMenu>
                                 {item.children.map((menu, index2) => {

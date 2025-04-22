@@ -9,13 +9,13 @@ const HeroSection = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="order-1 lg:order-1">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight hero-text-gradient">
+            <h1 data-aos="fade-down" className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight hero-text-gradient">
               Smart Money Management Starts Here
             </h1>
-            <p className="text-lg md:text-xl mb-8 text-muted-foreground max-w-xl">
+            <p data-aos="fade-down" className="text-lg md:text-xl mb-8 text-muted-foreground max-w-xl">
               Take control of your finances with ExpenseFlow – the all-in-one expense tracking solution that helps you save more, spend wisely, and achieve your financial goals.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div data-aos="fade-up" className="flex flex-col sm:flex-row gap-4">
               <Link href="/dashboard">
                 <Button size="lg" className="text-base bg-home text-white hover:bg-home/80">
                   Get Started
@@ -26,7 +26,7 @@ const HeroSection = () => {
                 Learn More
               </Button>
             </div>
-            <div className="mt-10 flex flex-wrap gap-6">
+            <div data-aos="fade-up" className="mt-10 flex flex-wrap gap-6">
               <div className="flex items-center">
                 <div className="bg-secondary rounded-full p-2 mr-2">
                   <Settings className="h-4 w-4 text-expense-500" />
@@ -48,8 +48,8 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="order-2 lg:order-2 flex justify-center">
-              <div className=" bg-radial from-expense-400 to-transparent rounded-full w-[500px] h-[500px] absolute -top-10 -left-10 opacity-20"></div>
-              <div className="relative z-10 bg-card border shadow-lg rounded-xl p-4  max-w-md w-full animate-float">
+              <div   className=" bg-radial from-expense-400 to-transparent rounded-full w-[500px] h-[500px] absolute -top-10 -left-10 opacity-20"></div>
+              <div  data-aos="fade-left"  className="relative z-10 bg-card border shadow-lg rounded-xl p-4  max-w-md w-full animate-float">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
                     <BarChart3 className="h-6 w-6 text-expense-500 mr-2" />

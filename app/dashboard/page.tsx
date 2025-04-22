@@ -21,14 +21,17 @@ const mockCategories = [
 export default function AdminDashboard() {
     return (
         <div className="space-y-12 pb-6">
-            <div>
+            <div data-aos="fade-up" data-aos-offset="500">
                 <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
                 <p className="text-muted-foreground">Overview of your expenses and spending patterns.</p>
             </div>
-
             {/* Stats Cards */}
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                <Card className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
+                <Card
+                    data-aos="zoom-in"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000"
+                    className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
                         <Wallet className="h-4 w-4 text-muted-foreground" />
@@ -40,8 +43,11 @@ export default function AdminDashboard() {
                         </p>
                     </CardContent>
                 </Card>
-
-                <Card className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
+                <Card
+                    data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000"
+                    className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Monthly Average</CardTitle>
                         <BarChart3 className="h-4 w-4 text-muted-foreground" />
@@ -54,7 +60,11 @@ export default function AdminDashboard() {
                     </CardContent>
                 </Card>
 
-                <Card className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
+                <Card
+                    data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000"
+                    className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Highest Category</CardTitle>
                         <TrendingUp className="h-4 w-4 text-muted-foreground" />
@@ -67,7 +77,11 @@ export default function AdminDashboard() {
                     </CardContent>
                 </Card>
 
-                <Card className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
+                <Card
+                    data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000"
+                    className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Recent Expense</CardTitle>
                         <CreditCard className="h-4 w-4 text-muted-foreground" />
@@ -83,7 +97,7 @@ export default function AdminDashboard() {
 
             {/* Expense Breakdown */}
             <div className="grid  md:grid-cols-2 gap-8">
-                <Card className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
+                <Card data-aos="fade-up" className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader>
                         <CardTitle>Expense Breakdown</CardTitle>
                         <CardDescription>
@@ -114,7 +128,7 @@ export default function AdminDashboard() {
                         </div>
                     </CardContent>
                 </Card>
-                <Card className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
+                <Card data-aos="fade-up" className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader>
                         <CardTitle>Monthly Trend</CardTitle>
                         <CardDescription>

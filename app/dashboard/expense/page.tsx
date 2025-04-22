@@ -45,8 +45,8 @@ const formatDate = (dateString: string) => {
 export default function AdminExpenses() {
     return (
         <div className="space-y-6 pb-12">
-            <div className="flex items-center justify-between">
-                <div>
+            <div data-aos="fade-down" className="flex items-center justify-between">
+                <div >
                     <h1 className="text-2xl font-bold tracking-tight ">Expenses</h1>
                     <p className="text-muted-foreground">Manage and track your expenses.</p>
                 </div>
@@ -63,8 +63,8 @@ export default function AdminExpenses() {
                     </Button>
                 </div>
             </div>
-            <Card className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
-                <CardHeader>
+            <Card  className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
+                <CardHeader data-aos="fade-up">
                     <CardTitle className="text-expense-500 text-xl">All Expenses</CardTitle>
                     <CardDescription>
                         View and manage all your recorded expenses.
@@ -82,7 +82,7 @@ export default function AdminExpenses() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                     <Table>
-                        <TableHeader>
+                        <TableHeader data-aos="fade-up">
                             <TableRow>
                                 <TableHead>User</TableHead>
                                 <TableHead>Date</TableHead>
@@ -94,7 +94,7 @@ export default function AdminExpenses() {
                         </TableHeader>
                         <TableBody>
                             {mockExpenses.map((expense) => (
-                                <TableRow key={expense.id} className="h-16 hover:bg-muted cursor-pointer">
+                                <TableRow data-aos="fade-up" key={expense.id} className="h-16 hover:bg-muted cursor-pointer">
                                     <TableCell><User className="text-expense-500" /></TableCell>
                                     <TableCell>{formatDate(expense.date)}</TableCell>
                                     <TableCell>{expense.description}</TableCell>

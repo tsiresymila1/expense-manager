@@ -1,9 +1,9 @@
 'use client'
 
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronRight } from "lucide-react"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 
 export function AppBreadcrumb() {
   const pathname = usePathname()
@@ -16,7 +16,7 @@ export function AppBreadcrumb() {
   })
 
   return (
-    <Breadcrumb className="pb-6">
+    <Breadcrumb className="pb-6" >
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
@@ -24,7 +24,7 @@ export function AppBreadcrumb() {
           </BreadcrumbLink>
         </BreadcrumbItem>
         {crumbs.map((crumb, i) => (
-          <div key={crumb.href} className="flex items-center">
+          <div key={crumb.href} data-aos="zoom-in" data-aos-offset="100" className="flex items-center">
             <BreadcrumbSeparator className="px-1">
               <ChevronRight className="w-4 h-4" />
             </BreadcrumbSeparator>

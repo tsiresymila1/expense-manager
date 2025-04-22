@@ -40,7 +40,7 @@ export default async function NavBar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-2">
+        <Link data-aos="zoom-in" href="/" className="flex items-center gap-2">
           <BarChart3 className="h-6 w-6 text-expense-500" />
           <span className="font-bold text-xl">ExpenseFlow</span>
         </Link>
@@ -56,7 +56,7 @@ export default async function NavBar() {
           <SheetContent>
             <div className="flex flex-col gap-4 pt-10">
               {links.map((link) => (
-                <NavItem key={link.title} title={link.title} url={link.url} />
+                <NavItem  key={link.title} title={link.title} url={link.url} />
               ))}
               <div className="flex flex-col gap-2 mt-4 items-center">
                 <ToggleThemeButton />
@@ -79,7 +79,7 @@ export default async function NavBar() {
             <NavItem key={link.title} title={link.title} url={link.url} />
           ))}
         </nav>
-        <div className="hidden md:flex items-center gap-2">
+        <div data-aos="zoom-in" className="hidden md:flex items-center gap-2">
           <ToggleThemeButton />
           {user ? <DashboardButton /> : <>
             <Link href="/auth/login">

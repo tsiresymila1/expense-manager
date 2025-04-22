@@ -9,13 +9,13 @@ const DataPrivacySection = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 hero-text-gradient inline-block">
+            <h2 data-aos="fade-down" className="text-3xl md:text-4xl font-bold mb-6 hero-text-gradient inline-block">
               Your Data Privacy Is Our Priority
             </h2>
-            <p className="text-lg mb-8 text-muted-foreground">
+            <p data-aos="fade-down" className="text-lg mb-8 text-muted-foreground">
               ExpenseFlow is committed to transparency in how we handle your personal and financial data. We collect only the information needed to provide you with our service and never share your data with third parties without your explicit consent.
             </p>
-            <div className="space-y-6">
+            <div data-aos="fade-up" className="space-y-6">
               <div className="flex items-start">
                 <div className="mr-4 bg-secondary rounded-full p-2">
                   <LockKeyhole className="h-6 w-6 text-expense-500" />
@@ -48,7 +48,7 @@ const DataPrivacySection = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-10">
+            <div data-aos="fade-up" className="mt-10">
               <Link href="/privacy-policy">
                 <Button variant="outline" size="lg" className="mr-4">
                   Read Privacy Policy
@@ -62,10 +62,10 @@ const DataPrivacySection = () => {
             </div>
           </div>
           
-          <div className="bg-card border rounded-xl p-8 shadow-sm">
+          <div data-aos="zoom-in" className="bg-card border rounded-xl p-8 shadow-sm">
             <h3 className="text-2xl font-semibold mb-6 text-center">Data We Collect</h3>
             <div className="space-y-6">
-              <div className="bg-secondary rounded-lg p-4">
+              <div data-aos="fade-up" className="bg-secondary rounded-lg p-4">
                 <h4 className="font-medium mb-2">Account Information</h4>
                 <p className="text-sm text-muted-foreground">
                   Basic details like your name and email address to create and manage your account.
@@ -75,7 +75,7 @@ const DataPrivacySection = () => {
                 </div>
               </div>
               
-              <div className="bg-secondary rounded-lg p-4">
+              <div data-aos="fade-up" className="bg-secondary rounded-lg p-4">
                 <h4 className="font-medium mb-2">Financial Data</h4>
                 <p className="text-sm text-muted-foreground">
                   Expense records, budgets, and categories you create within the app.
@@ -85,7 +85,7 @@ const DataPrivacySection = () => {
                 </div>
               </div>
               
-              <div className="bg-secondary rounded-lg p-4">
+              <div data-aos="fade-up" className="bg-secondary rounded-lg p-4">
                 <h4 className="font-medium mb-2">Usage Information</h4>
                 <p className="text-sm text-muted-foreground">
                   How you interact with our app to improve user experience.
@@ -95,7 +95,7 @@ const DataPrivacySection = () => {
                 </div>
               </div>
               
-              <div className="bg-secondary rounded-lg p-4">
+              <div data-aos="fade-up" className="bg-secondary rounded-lg p-4">
                 <h4 className="font-medium mb-2">Device Information</h4>
                 <p className="text-sm text-muted-foreground">
                   Basic details about your device for security and compatibility.

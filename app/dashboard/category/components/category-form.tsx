@@ -53,14 +53,14 @@ export default function CategoryForm() {
         form.reset();
     };
 
-    return <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+    return <Dialog  open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger asChild>
             <Button className="flex items-center gap-2 bg-expense-500 hover:bg-expense-800 text-white">
                 <PlusCircle className="h-4 w-4" />
                 <span>Add Category</span>
             </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="dark:border-expense-900/80 ">
             <DialogHeader>
                 <DialogTitle className="text-expense-500">Add New Category</DialogTitle>
                 <DialogDescription>

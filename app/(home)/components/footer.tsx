@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-card/60 border-t px-4 py-12">
+    <footer  className="bg-card/60 border-t px-4 py-12">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
               <BarChart3 className="h-6 w-6 text-expense-500" />
@@ -86,7 +86,6 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        
         <div className="border-t pt-8 text-center text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} ExpenseFlow. All rights reserved.</p>
         </div>

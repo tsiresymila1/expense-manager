@@ -10,7 +10,7 @@ export default async function LoginPage() {
     if (user) {
         redirect('/dashboard')
     }
-    return <div className="lg:w-[800px] max-lg:max-w-[400px]  flex dark:bg-slate-950 bg-slate-100 w-full rounded-md">
+    return <div data-aos="zoom-in" className="lg:w-[800px] max-lg:max-w-[400px]  flex dark:bg-slate-950 bg-slate-100 w-full rounded-md">
         <div className="flex-1 p-8 dark:bg-[rgb(16,25,45)] dark:bg-opacity-100 border border-r-0 dark:border-expense-500/10 bg-slate-200 flex flex-col justify-center items-center max-lg:hidden">
             <Link href="/" className="text-center flex flex-col justify-center items-center cursor-pointer">
                 <BarChart3 size={80} className="text-expense-600" />

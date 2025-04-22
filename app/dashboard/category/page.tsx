@@ -16,14 +16,14 @@ const initialCategories = [
 
 export default function CategoryPage() {
     return <div className="space-y-6 pb-12">
-        <div className="flex justify-between items-center">
+        <div data-aos="fade-down" className="flex justify-between items-center">
             <div>
                 <h1 className="text-2xl font-bold tracking-tight">Categories</h1>
                 <p className="text-muted-foreground">Manage expense categories for better organization.</p>
             </div>
             <CategoryForm />
         </div>
-        <Card className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-950/80 shadow-sm">
+        <Card data-aos="fade-up" className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
             <CardHeader>
                 <CardTitle className="text-xl text-expense-500">Expense Categories</CardTitle>
                 <CardDescription>

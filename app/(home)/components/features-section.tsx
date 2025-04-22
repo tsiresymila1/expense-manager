@@ -58,7 +58,7 @@ const FeaturesSection = () => {
   return (
     <section id="features" className="py-20 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <div data-aos="fade-up" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 hero-text-gradient inline-block">
             Powerful Features for Your Financial Journey
           </h2>
@@ -72,6 +72,7 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <div 
               key={index} 
+              data-aos="zoom-in"
               className="bg-card border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="mb-4">{feature.icon}</div>

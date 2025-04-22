@@ -8,7 +8,7 @@ export default async function NotFoundPage() {
     const user = await getUser()
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
-            <div className="text-center justify-center flex flex-col">
+            <div data-aos="zoom-in" className="text-center justify-center flex flex-col">
                 <h1 className="text-7xl font-bold text-expense-500 mb-4">404</h1>
                 <p className="text-2xl font-semibold mb-6">Page Not Found</p>
                 <p className="text-muted-foreground max-w-md mx-auto mb-8">
