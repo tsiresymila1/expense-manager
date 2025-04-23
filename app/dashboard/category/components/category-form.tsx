@@ -1,14 +1,15 @@
 
 "use client"
 
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusCircle } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
+import { createCategory } from "@/app/actions/category/add-category";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -28,6 +29,7 @@ type CategoryFormValues = z.infer<typeof categoryFormSchema>;
 
 export default function CategoryForm() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const { executeAsync } = useAction(createCategory)
     const form = useForm<CategoryFormValues>({
         resolver: zodResolver(categoryFormSchema),
         defaultValues: {
@@ -37,8 +39,7 @@ export default function CategoryForm() {
         },
     });
 
-    const onSubmit = (data: CategoryFormValues) => {
-
+    const onSubmit = async (data: CategoryFormValues) => {
         const newCategory = {
             name: data.name,
             value: data.value,
@@ -46,14 +47,22 @@ export default function CategoryForm() {
         };
         console.log("newCategory", newCategory);
 
-        toast.success("Category added successfully", {
-            description: `${data.name} has been added to categories`,
-        });
-        setIsDialogOpen(false);
-        form.reset();
+        const res = await executeAsync(newCategory)
+        if (res?.data?.success) {
+            toast.success("Category added successfully", {
+                description: `${data.name} has been added to categories`,
+            });
+            form.reset();
+            setIsDialogOpen(false);
+        } else {
+            toast.error("Error", {
+                description: res?.data?.error ?? res?.serverError ?? res?.validationErrors?.description?._errors
+            })
+        }
+
     };
 
-    return <Dialog  open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+    return <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger asChild>
             <Button className="flex items-center gap-2 bg-expense-500 hover:bg-expense-800 text-white">
                 <PlusCircle className="h-4 w-4" />
@@ -120,7 +129,7 @@ export default function CategoryForm() {
                         )}
                     />
                     <DialogFooter className="pt-4">
-                        <Button type="button" variant="outline"  onClick={() => setIsDialogOpen(false)}>
+                        <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                             Cancel
                         </Button>
                         <Button className="bg-expense-500 hover:bg-expense-800 text-white" type="submit">Add Category</Button>

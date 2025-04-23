@@ -1,15 +1,9 @@
-import { getUser } from "@/app/actions/get-user";
 import { Label } from "@/components/ui/label";
 import { BarChart3 } from "lucide-react";
-import { redirect } from "next/navigation";
 import RegisterForm from "../components/register-form";
 import Link from "next/link";
 
 export default async function RegisterPage() {
-    const user = await getUser()
-    if (user) {
-        redirect('/dashboard')
-    }
     return <div className="w-screen h-full flex flex-row">
         <div className="flex-1 dark:bg-slate-900 bg-slate-200 flex flex-col items-center justify-center max-lg:hidden">
             <div data-aos="fade-down" className="p-4 flex items-center gap-3 justify-center">

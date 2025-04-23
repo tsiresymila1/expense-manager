@@ -16,7 +16,7 @@ const DataPrivacySection = () => {
               ExpenseFlow is committed to transparency in how we handle your personal and financial data. We collect only the information needed to provide you with our service and never share your data with third parties without your explicit consent.
             </p>
             <div data-aos="fade-up" className="space-y-6">
-              <div className="flex items-start">
+              <div data-aos="fade-up" className="flex items-start">
                 <div className="mr-4 bg-secondary rounded-full p-2">
                   <LockKeyhole className="h-6 w-6 text-expense-500" />
                 </div>
@@ -26,7 +26,7 @@ const DataPrivacySection = () => {
                 </div>
               </div>
               
-              <div className="flex items-start">
+              <div data-aos="fade-up" data-aos-delay="300" className="flex items-start">
                 <div className="mr-4 bg-secondary rounded-full p-2">
                   <Shield className="h-6 w-6 text-expense-500" />
                 </div>
@@ -36,7 +36,7 @@ const DataPrivacySection = () => {
                 </div>
               </div>
               
-              <div className="flex items-start">
+              <div data-aos="fade-up" data-aos-delay="600" className="flex items-start">
                 <div className="mr-4 bg-secondary rounded-full p-2">
                   <Eye className="h-6 w-6 text-expense-500" />
                 </div>
@@ -48,14 +48,14 @@ const DataPrivacySection = () => {
                 </div>
               </div>
             </div>
-            <div data-aos="fade-up" className="mt-10">
+            <div  className="mt-10">
               <Link href="/privacy-policy">
-                <Button variant="outline" size="lg" className="mr-4">
+                <Button data-aos="fade-right" variant="outline" size="lg" className="mr-4">
                   Read Privacy Policy
                 </Button>
               </Link>
               <Link href="/terms">
-                <Button variant="ghost" size="lg">
+                <Button  data-aos="fade-left" data-aos-delay="300" variant="ghost" size="lg">
                   Terms of Service
                 </Button>
               </Link>

@@ -58,11 +58,11 @@ const FeaturesSection = () => {
   return (
     <section id="features" className="py-20 px-4">
       <div className="container mx-auto">
-        <div data-aos="fade-up" className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 hero-text-gradient inline-block">
+        <div  className="text-center mb-16">
+          <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-bold mb-4 hero-text-gradient inline-block">
             Powerful Features for Your Financial Journey
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p data-aos="zoom-in" className="text-lg text-muted-foreground max-w-2xl mx-auto">
             ExpenseFlow comes packed with everything you need to take control of your finances
             and make informed decisions about your money.
           </p>

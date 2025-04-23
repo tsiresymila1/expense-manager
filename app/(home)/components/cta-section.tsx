@@ -10,22 +10,22 @@ const CTASection = () => {
         <h2 data-aos="fade-down" className="text-3xl md:text-4xl font-bold mb-6">
           Ready to Take Control of Your Finances?
         </h2>
-        <p data-aos="fade-down" className="text-lg mb-8 max-w-2xl mx-auto opacity-90">
+        <p data-aos="zoom-in" data-aos-delay="300" className="text-lg mb-8 max-w-2xl mx-auto opacity-90">
           Join thousands of users who have transformed their financial habits with ExpenseFlow.
           Start your journey to financial wellness today!
         </p>
-        <div data-aos="fade-up" className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/dashboard">
-            <Button size="lg" className="bg-white text-expense-700 hover:bg-white/90">
+            <Button size="lg" data-aos="fade-right" className="bg-white text-expense-700 hover:bg-white/90">
               Start For Free
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-          <Button variant="outline" size="lg" className="bg-transparent text-white hover:bg-white/80 hover:text-expense-700">
+          <Button data-aos="fade-left" variant="outline" size="lg" className="bg-transparent text-white hover:bg-white/80 hover:text-expense-700">
             Learn More
           </Button>
         </div>
-        <p data-aos="fade-up" className="mt-6 text-sm opacity-80">
+        <p data-aos="fade-up" data-aos-delay="300" className="mt-6 text-sm opacity-80">
           No credit card required. 14-day free trial.
         </p>
       </div>

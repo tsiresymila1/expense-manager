@@ -1,12 +1,10 @@
 import { auth } from "@/lib/auth";
-import {
-  createSafeActionClient,
-  DEFAULT_SERVER_ERROR_MESSAGE,
-} from "next-safe-action";
+import { createSafeActionClient } from "next-safe-action";
 import { headers } from "next/headers";
 import * as z from "zod";
 
 class ActionError extends Error {}
+
 export const appSafeAction = createSafeActionClient({
   defineMetadataSchema() {
     return z.object({
@@ -17,7 +15,7 @@ export const appSafeAction = createSafeActionClient({
     if (e instanceof ActionError) {
       return e.message;
     }
-    return DEFAULT_SERVER_ERROR_MESSAGE;
+    return e.message;
   },
 });
 
@@ -26,7 +24,11 @@ export const securedSafeAction = appSafeAction.use(async (p) => {
     headers: await headers(),
   });
   if (user?.user && user?.session) {
-    return p.next();
+    return p.next({
+      ctx: {
+        user: user?.user,
+      },
+    });
   } else {
     throw new ActionError("Not authorized");
   }

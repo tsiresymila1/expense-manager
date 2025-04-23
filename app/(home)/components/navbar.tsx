@@ -74,7 +74,7 @@ export default async function NavBar() {
         </Sheet>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav data-aos="fade-left" className="hidden md:flex items-center gap-6">
           {links.map((link) => (
             <NavItem key={link.title} title={link.title} url={link.url} />
           ))}

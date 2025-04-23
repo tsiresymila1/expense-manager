@@ -64,16 +64,16 @@ const items: SideMenuType[] = [
     },
     {
         title: "Settings",
-        url: '/admin',
+        url: '/dashboard',
         children: [
             {
                 title: "Settings",
-                url: "#",
+                url: "/settings",
                 icon: Settings,
             },
             {
                 title: "Help",
-                url: "#",
+                url: "/help",
                 icon: HelpCircle,
             }
         ]

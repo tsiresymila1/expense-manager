@@ -27,11 +27,11 @@ const TestimonialsSection = () => {
   return (
     <section className="py-20 px-4 bg-secondary dark:bg-secondary/30">
       <div className="container mx-auto">
-        <div data-aos="fade-up" className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 hero-text-gradient inline-block">
+        <div  className="text-center mb-16">
+          <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-bold mb-4 hero-text-gradient inline-block">
             What Our Users Say
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p data-aos="fade-up" data-aos-delay="200" className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Join thousands of satisfied users who have transformed their financial habits with ExpenseFlow.
           </p>
         </div>

@@ -1,13 +1,12 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { getSessionCookie } from "better-auth/cookies";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
-    const data = await auth.api.getSession({
-      headers: await headers(),
+    const sessionCookie = getSessionCookie(request, {
+      cookiePrefix: "expense-manager",
     });
-    if (!data?.user || !data?.session) {
+    if (!sessionCookie) {
       return NextResponse.redirect(new URL("/auth/login", request.url));
     }
   }
@@ -22,7 +21,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  runtime: "nodejs",
   matcher: [
     "/((?!_next/static|!api|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],

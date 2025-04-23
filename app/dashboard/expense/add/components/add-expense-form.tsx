@@ -115,12 +115,12 @@ export default function AddExpenseForm() {
     };
     return <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div  className="grid gap-6 sm:grid-cols-2">
                 <FormField
                     control={form.control}
                     name="date"
                     render={({ field }) => (
-                        <FormItem className="flex flex-col">
+                        <FormItem  data-aos="fade-right" className="flex flex-col">
                             <FormLabel>Date</FormLabel>
                             <Popover>
                                 <PopoverTrigger asChild>
@@ -164,7 +164,7 @@ export default function AddExpenseForm() {
                     control={form.control}
                     name="amount"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem data-aos="fade-left">
                             <FormLabel>Amount (₹)</FormLabel>
                             <FormControl>
                                 <Input
@@ -183,12 +183,12 @@ export default function AddExpenseForm() {
                 />
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div  className="grid gap-6 sm:grid-cols-2">
                 <FormField
                     control={form.control}
                     name="category"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem data-aos="fade-right">
                             <FormLabel>Category</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
@@ -216,7 +216,7 @@ export default function AddExpenseForm() {
                     control={form.control}
                     name="paymentMethod"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem data-aos="fade-left">
                             <FormLabel>Payment Method</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
@@ -241,6 +241,7 @@ export default function AddExpenseForm() {
                 />
             </div>
 
+            <div className="space-y-6" data-aos="fade-up">
             <FormField
                 control={form.control}
                 name="description"
@@ -278,6 +279,7 @@ export default function AddExpenseForm() {
                     </FormItem>
                 )}
             />
+            </div>
 
             <div className="flex justify-end gap-2">
                 <Button

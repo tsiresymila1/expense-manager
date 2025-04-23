@@ -45,12 +45,12 @@ const formatDate = (dateString: string) => {
 export default function AdminExpenses() {
     return (
         <div className="space-y-6 pb-12">
-            <div data-aos="fade-down" className="flex items-center justify-between">
-                <div >
+            <div className="flex items-center justify-between">
+                <div  data-aos="fade-right" >
                     <h1 className="text-2xl font-bold tracking-tight ">Expenses</h1>
                     <p className="text-muted-foreground">Manage and track your expenses.</p>
                 </div>
-                <div className="flex gap-2">
+                <div  data-aos="fade-left"  className="flex gap-2">
                     <Button variant="outline" className="border dark:border-expense-700">
                         <Download className="mr-2 h-4 w-4" />
                         Export
@@ -63,8 +63,8 @@ export default function AdminExpenses() {
                     </Button>
                 </div>
             </div>
-            <Card  className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
-                <CardHeader data-aos="fade-up">
+            <Card data-aos="fade-left" className="bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
+                <CardHeader data-aos="zoom-in">
                     <CardTitle className="text-expense-500 text-xl">All Expenses</CardTitle>
                     <CardDescription>
                         View and manage all your recorded expenses.
@@ -81,7 +81,7 @@ export default function AdminExpenses() {
                     </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                    <Table>
+                    <Table data-aos="fade-up">
                         <TableHeader data-aos="fade-up">
                             <TableRow>
                                 <TableHead>User</TableHead>

@@ -21,7 +21,7 @@ import { UserCircle2 } from "lucide-react"
 export async function ProfileButton() {
     const user = await getUser()
     return (
-        <DropdownMenu>
+        <DropdownMenu> 
             <DropdownMenuTrigger asChild className="focus:ring-0 focus:outline-none active:ring-0 active:outline-none">
                 <Button variant="ghost" size="icon" className="focus:ring-0 focus:outline-none active:ring-0 active:outline-none">
                     <Avatar className="w-7 h-7">

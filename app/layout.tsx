@@ -5,8 +5,9 @@ import { ABeeZee, Geist, Geist_Mono, Montserrat } from "next/font/google";
 
 
 import Aos from "@/components/aos";
-import "./globals.css";
+import ProgressProviders from "@/components/progress";
 import 'aos/dist/aos.css';
+import "./globals.css";
 
 
 const geistSans = Geist({
@@ -55,8 +56,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${abeeZee.variable} ${montserrat.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-
-          {children}
+          <ProgressProviders>
+            {children}
+          </ProgressProviders>
           <Aos />
         </ThemeProvider>
         <Toaster position="bottom-center" richColors />

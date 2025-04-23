@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 
-import ProgressProviders from "@/components/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/app-sidebar";
@@ -18,7 +17,6 @@ export default function AppLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ProgressProviders>
             <SidebarProvider>
                 <AppSidebar />
                 <main className="w-full flex flex-col gap-4 relative h-screen overflow-hidden">
@@ -29,6 +27,5 @@ export default function AppLayout({
                     </ScrollArea>
                 </main>
             </SidebarProvider>
-        </ProgressProviders>
     );
 }
