@@ -10,13 +10,14 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
+import GithubAuthButton from "./github-auth";
 import GoogleAuthButton from "./google-auth";
 
 export type RegisterInput = { name: string; email: string; password: string };
@@ -59,25 +60,31 @@ export default function RegisterForm() {
     const router = useRouter();
 
     const onSubmit = async (data: RegisterInput) => {
-        const res = await authClient.signUp.email({
-            email: data.email,
-            password: data.password,
-            name: data.name,
-            callbackURL: "/dashboard",
-            fetchOptions: {
-                method: "POST"
+        setLoading(true);
+        try {
+            const res = await authClient.signUp.email({
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                callbackURL: "/dashboard",
+                fetchOptions: {
+                    method: "POST"
+                }
+            });
+
+            if (res?.error?.message) {
+                toast.error("Invalid credentials", {
+                    description: `${res.error.message}`
+                })
+                setSuccess(null);
+            } else {
+                setSuccess("Logged")
+                router.push("/dashboard");
             }
-        });
-        setLoading(false);
-        if (res?.error?.message) {
-            toast.error("Invalid credentials", {
-                description: `${res.error.message}`
-            })
-            setSuccess(null);
-        } else {
-            setSuccess("Logged")
-            router.push("/dashboard");
+        } finally {
+            setLoading(false);
         }
+
     };
 
     return (
@@ -136,7 +143,7 @@ export default function RegisterForm() {
                             </div>
                         </div>
                         <Button type="submit" disabled={loading} className="w-full bg-expense-600 hover:bg-expense-700 text-white">
-                            {loading ? "Registering..." : "Register"}
+                            {loading ? <Loader className="animate-spin" /> : null} Register
                         </Button>
                         <div className="flex justify-center items-center gap-1">
                             <Label>Have already an account? </Label>
@@ -149,10 +156,10 @@ export default function RegisterForm() {
                             <Label>OR</Label>
                             <Separator className="flex-1" />
                         </div>
-                        <div className="w-full flex items-center justify-between">
+                        <div className="w-full flex flex-col items-center gap-4">
                             <GoogleAuthButton />
+                            <GithubAuthButton />
                         </div>
-
                     </CardContent>
                 </div>
             </form>

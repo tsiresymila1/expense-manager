@@ -2,12 +2,12 @@
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { Loader } from "lucide-react";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import google from '@/assets/logos/google.png'
-import Image from "next/image";
+import github from '@/assets/logos/github.png'
 
-export default function GoogleAuthButton() {
+export default function GithubAuthButton() {
     const [loading, setLoading] = useState<boolean>(false)
     return <div className="w-full flex items-center justify-between">
         <Button
@@ -19,7 +19,7 @@ export default function GoogleAuthButton() {
                 setLoading(true)
                 try {
                     const res = await authClient.signIn.social({
-                        provider: "google",
+                        provider: "github",
                     })
                     if (res.data?.url) {
                         redirect(res.data.url)
@@ -31,7 +31,7 @@ export default function GoogleAuthButton() {
                 }
             }}
         >
-            {loading ? <Loader className="animate-spin" /> : <Image width="20" height="20" src={google} alt="google" />}Continue with Google
+            {loading ? <Loader className="animate-spin" />: <Image width="20" height="20" src={github} alt="google" />} Continue with Github
         </Button>
     </div>
 }

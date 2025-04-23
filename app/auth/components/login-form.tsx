@@ -9,12 +9,13 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
+import GithubAuthButton from "./github-auth";
 import GoogleAuthButton from "./google-auth";
 
 const schema = z.object({
@@ -37,18 +38,26 @@ export default function LoginForm() {
         resolver: zodResolver(schema),
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = async (data: z.infer<typeof schema>) => {
-        const res = await authClient.signIn.email({
-            email: data.email,
-            password: data.password,
-            callbackURL: "/dashboard",
-        });
-        if (res?.error) {
-            toast.error("Invalid credentials", {
-                description: `${res.error.message}`
-            })
+        setLoading(true);
+        try {
+            const res = await authClient.signIn.email({
+                email: data.email,
+                password: data.password,
+                callbackURL: "/dashboard",
+            });
+            if (res?.error) {
+                toast.error("Invalid credentials", {
+                    description: `${res.error.message}`
+                })
+            }
         }
+        finally {
+            setLoading(false)
+        }
+
     };
 
 
@@ -102,7 +111,10 @@ export default function LoginForm() {
                                     {errors.cgu && <FormError>{errors.cgu.message}</FormError>}
                                 </div>
                             </div>
-                            <Button type="submit" className="bg-expense-600 hover:bg-expense-700 text-white">Login</Button>
+                            <Button disabled={loading} type="submit" className="bg-expense-600 hover:bg-expense-700 text-white">
+                                {loading ? <Loader className="animate-spin" /> : null}
+                                Login
+                            </Button>
                         </form>
                         <div className="flex justify-center items-center gap-1">
                             <Label>Don&apos;t have an account? </Label>
@@ -115,10 +127,10 @@ export default function LoginForm() {
                             <Label>OR</Label>
                             <Separator className="flex-1" />
                         </div>
-                        <div className="w-full flex items-center justify-between">
+                        <div className="w-full flex flex-col items-center gap-4">
                             <GoogleAuthButton />
+                            <GithubAuthButton />
                         </div>
-                        
                     </CardContent>
                 </div>
             </div>
