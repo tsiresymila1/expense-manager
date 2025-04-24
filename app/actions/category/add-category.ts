@@ -16,11 +16,13 @@ export const createCategory = securedSafeAction
     actionName: "create-category",
   })
   .action<{ success?: string; error?: string }>(
-    async ({ parsedInput: { name }, ctx }) => {
+    async ({ parsedInput: { name, value, description }, ctx }) => {
       revalidatePath("/dashboard/category");
       await prisma.category.create({
         data: {
           name,
+          value,
+          description,
           userId: ctx.user.id,
         },
       });

@@ -24,8 +24,8 @@ export default async function CategoryTable({ searchParams }: { searchParams: Pr
             {data.map((category) => (
                 <TableRow data-aos="fade-up" key={category.id} className="h-14">
                     <TableCell className="font-medium">{category.name}</TableCell>
-                    <TableCell>{category.color}</TableCell>
-                    <TableCell className="hidden md:table-cell">{category.updatedAt.toISOString()}</TableCell>
+                    <TableCell>{category.value}</TableCell>
+                    <TableCell className="hidden md:table-cell">{category.description}</TableCell>
                     <TableCell>
                         <div className="flex items-center gap-2">
                             <Button variant="ghost" size="icon" className="h-8 w-8">
