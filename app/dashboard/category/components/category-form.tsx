@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Loader } from "lucide-react";
 
 
 const categoryFormSchema = z.object({
@@ -39,7 +40,7 @@ type Props = {
 
 export default function CategoryForm({ children, category }: Props) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const { executeAsync } = useAction(upsertCategory)
+    const { executeAsync, isExecuting, isPending } = useAction(upsertCategory)
 
     const form = useForm<CategoryFormValues>({
         resolver: zodResolver(categoryFormSchema),
@@ -156,7 +157,9 @@ export default function CategoryForm({ children, category }: Props) {
                         <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                             Cancel
                         </Button>
-                        <Button className="bg-expense-500 hover:bg-expense-800 text-white" type="submit">Save</Button>
+                        <Button disabled={isExecuting || isPending} className="bg-expense-500 hover:bg-expense-800 text-white" type="submit">
+                            {isExecuting || isPending ? <Loader className="animate-spin" /> : null} Save
+                        </Button>
                     </DialogFooter>
                 </form>
             </Form>

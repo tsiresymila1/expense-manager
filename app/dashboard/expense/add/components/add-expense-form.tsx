@@ -1,7 +1,7 @@
 "use client"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -91,7 +91,7 @@ type Props = {
 
 export default function AddExpenseForm({ categories, expense }: Props) {
     const navigate = useRouter();
-    const { executeAsync, isExecuting } = useAction(upsertExpense)
+    const { executeAsync, isExecuting, isPending } = useAction(upsertExpense)
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -103,7 +103,7 @@ export default function AddExpenseForm({ categories, expense }: Props) {
 
     // Submit handler
     const onSubmit = async (data: FormValues) => {
-        const actionType =  expense?.id ? 'updated': 'added'
+        const actionType = expense?.id ? 'updated' : 'added'
         const res = await executeAsync({
             ...data,
             id: expense?.id
@@ -316,8 +316,8 @@ export default function AddExpenseForm({ categories, expense }: Props) {
                 >
                     Cancel
                 </Button>
-                <Button disabled={isExecuting} type="submit" className="bg-expense-500 hover:bg-expense-800 text-white">
-                    Save
+                <Button disabled={isExecuting || isPending} type="submit" className="bg-expense-500 hover:bg-expense-800 text-white">
+                   {isExecuting || isPending ? <Loader className="animate-spin" />: null} Save
                 </Button>
             </div>
         </form>
