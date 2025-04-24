@@ -1,13 +1,12 @@
 
-import React from "react";
-import { BarChart3, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { BarChart3, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer  className="bg-card/60 border-t px-4 py-12">
+    <footer className="bg-card/60 border-t px-4 py-12">
       <div className="container mx-auto">
-        <div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
               <BarChart3 className="h-6 w-6 text-expense-500" />
@@ -31,7 +30,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-lg mb-4">Product</h3>
             <ul className="space-y-3">
@@ -49,7 +48,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-lg mb-4">Resources</h3>
             <ul className="space-y-3">
@@ -67,7 +66,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-lg mb-4">Company</h3>
             <ul className="space-y-3">
