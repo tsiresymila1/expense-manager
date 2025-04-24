@@ -1,7 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import AddExpenseForm from "./components/add-expense-form";
+import prisma from "@/lib/prisma";
+import { getUser } from "@/app/actions/get-user";
 
-export default function AdminAddExpense() {
+export default async  function ExpenseAddPage() {
+    const user = await getUser()
+    const data = await prisma.category.findMany({
+        where: {
+            userId: user?.id
+        },
+    })
     return (
         <div className="space-y-6 pb-6">
             <div data-aos="fade-right">
@@ -16,7 +24,7 @@ export default function AdminAddExpense() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <AddExpenseForm />
+                    <AddExpenseForm categories={data} />
                 </CardContent>
             </Card>
         </div>

@@ -2,14 +2,13 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusCircle } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import { createCategory } from "@/app/actions/category/add-category";
+import { upsertCategory } from "@/app/actions/category/action";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -17,6 +16,7 @@ import { Input } from "@/components/ui/input";
 
 
 const categoryFormSchema = z.object({
+    id: z.string().optional(),
     name: z.string().min(3, "Name must be at least 3 characters"),
     value: z
         .string()
@@ -26,10 +26,21 @@ const categoryFormSchema = z.object({
 });
 
 type CategoryFormValues = z.infer<typeof categoryFormSchema>;
+export type MinCategory = {
+    id?: string,
+    name?: string,
+    value?: string | null,
+    desc?: string | null
+}
+type Props = {
+    children: React.ReactNode,
+    category?: MinCategory
+}
 
-export default function CategoryForm() {
+export default function CategoryForm({ children, category }: Props) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const { executeAsync } = useAction(createCategory)
+    const { executeAsync } = useAction(upsertCategory)
+
     const form = useForm<CategoryFormValues>({
         resolver: zodResolver(categoryFormSchema),
         defaultValues: {
@@ -44,13 +55,15 @@ export default function CategoryForm() {
             name: data.name,
             value: data.value,
             description: data.description || "",
+            id: data.id
         };
         console.log("newCategory", newCategory);
 
         const res = await executeAsync(newCategory)
+        const action_type = data.id ? 'updated' : 'added'
         if (res?.data?.success) {
-            toast.success("Category added successfully", {
-                description: `${data.name} has been added to categories`,
+            toast.success(`Category ${action_type} successfully"`, {
+                description: `${data.name} has been ${action_type} to categories`,
             });
             form.reset();
             setIsDialogOpen(false);
@@ -62,18 +75,29 @@ export default function CategoryForm() {
 
     };
 
-    return <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+    useEffect(() => {
+        if (category) {
+            form.setValue("id", category.id);
+            form.setValue("name", category.name ?? "");
+            form.setValue("value", category.value ?? "");
+            form.setValue("description", category.desc ?? "");
+        }
+    }, [category, form])
+
+    return <Dialog open={isDialogOpen} onOpenChange={(e) => {
+        setIsDialogOpen(e)
+        if (!e) {
+            form.reset();
+        }
+    }}>
         <DialogTrigger asChild>
-            <Button className="flex items-center gap-2 bg-expense-500 hover:bg-expense-800 text-white">
-                <PlusCircle className="h-4 w-4" />
-                <span>Add Category</span>
-            </Button>
+            {children}
         </DialogTrigger>
         <DialogContent className="dark:border-expense-900/80 ">
             <DialogHeader>
-                <DialogTitle className="text-expense-500">Add New Category</DialogTitle>
+                <DialogTitle className="text-expense-500">{category ? "Update Category" : "Add New Category"}</DialogTitle>
                 <DialogDescription>
-                    Create a new category for organizing expenses.
+                    {category ? "Create a new category for organizing expenses" : "Update a category for organizing expenses"}.
                 </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -132,7 +156,7 @@ export default function CategoryForm() {
                         <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                             Cancel
                         </Button>
-                        <Button className="bg-expense-500 hover:bg-expense-800 text-white" type="submit">Add Category</Button>
+                        <Button className="bg-expense-500 hover:bg-expense-800 text-white" type="submit">Save</Button>
                     </DialogFooter>
                 </form>
             </Form>

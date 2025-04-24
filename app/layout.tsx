@@ -58,10 +58,10 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ProgressProviders>
             {children}
-          </ProgressProviders>
+          </ProgressProviders> 
           <Aos />
         </ThemeProvider>
-        <Toaster position="bottom-center" richColors />
+        <Toaster duration={3000} toastOptions={{ closeButton: true}}  position="top-right" richColors />
       </body>
     </html >
   );

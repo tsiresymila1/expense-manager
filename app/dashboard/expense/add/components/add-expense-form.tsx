@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
+import { upsertExpense } from "@/app/actions/expense/action";
+import { MinCategory } from "@/app/dashboard/category/components/category-form";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -32,24 +34,10 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { useAction } from "next-safe-action/hooks";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-
-// Categories for expenses
-const expenseCategories = [
-    { value: "food", label: "Food & Dining" },
-    { value: "housing", label: "Housing & Rent" },
-    { value: "transportation", label: "Transportation" },
-    { value: "utilities", label: "Utilities" },
-    { value: "entertainment", label: "Entertainment" },
-    { value: "health", label: "Healthcare" },
-    { value: "education", label: "Education" },
-    { value: "personal", label: "Personal Care" },
-    { value: "debt", label: "Debt Payments" },
-    { value: "savings", label: "Savings & Investments" },
-    { value: "gifts", label: "Gifts & Donations" },
-    { value: "other", label: "Other" },
-];
 
 // Payment methods
 const paymentMethods = [
@@ -63,6 +51,7 @@ const paymentMethods = [
 
 // Zod schema for form validation
 const formSchema = z.object({
+    id: z.string().optional(),
     date: z.date({
         required_error: "Please select a date",
     }),
@@ -79,48 +68,80 @@ const formSchema = z.object({
         .string()
         .min(3, "Description must be at least 3 characters")
         .max(100, "Description must be less than 100 characters"),
-    paymentMethod: z.string({
+    payment: z.string({
         required_error: "Please select a payment method",
     }),
     notes: z.string().optional(),
 });
 
-
+export type MinExpense = {
+    id?: string;
+    date: Date;
+    description: string;
+    amount: number;
+    notes?: string | null;
+    payment: string;
+    categoryId: string;
+}
 type FormValues = z.infer<typeof formSchema>;
+type Props = {
+    categories: MinCategory[],
+    expense?: MinExpense | null
+}
 
-export default function AddExpenseForm() {
+export default function AddExpenseForm({ categories, expense }: Props) {
     const navigate = useRouter();
-    // Initialize form with react-hook-form and zod
+    const { executeAsync, isExecuting } = useAction(upsertExpense)
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             date: new Date(),
             amount: undefined,
             description: "",
-            notes: "",
         },
     });
 
     // Submit handler
-    const onSubmit = (data: FormValues) => {
-        console.log("Form data:", data);
-        // Show success toast
-        toast.success("Expense added successfully", {
-            description: `₹${data.amount} for ${data.description}`,
-        });
-
-        setTimeout(() => {
-            navigate.push("/admin/expenses");
-        }, 500);
+    const onSubmit = async (data: FormValues) => {
+        const actionType =  expense?.id ? 'updated': 'added'
+        const res = await executeAsync({
+            ...data,
+            id: expense?.id
+        })
+        if (res?.data?.success) {
+            toast.success(`Expense ${actionType} successfully`, {
+                description: `$${data.amount} for ${data.description}`,
+            });
+            form.reset();
+            navigate.push("/dashboard/expense");
+        } else {
+            toast.error("Error", {
+                description: res?.data?.error ?? res?.serverError ?? res?.validationErrors?.description?._errors
+            })
+        }
     };
+
+    useEffect(() => {
+        if (expense) {
+            form.setValue("id", expense.id)
+            form.setValue("date", expense.date)
+            form.setValue("description", expense.description)
+            form.setValue("amount", expense.amount)
+            form.setValue("notes", expense.notes ?? undefined)
+            form.setValue("category", expense.categoryId)
+            form.trigger("category")
+            form.setValue("payment", expense.payment)
+            form.trigger("payment")
+        }
+    }, [expense, form])
     return <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div  className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2">
                 <FormField
                     control={form.control}
                     name="date"
                     render={({ field }) => (
-                        <FormItem  data-aos="fade-right" className="flex flex-col">
+                        <FormItem data-aos="fade-right" className="flex flex-col">
                             <FormLabel>Date</FormLabel>
                             <Popover>
                                 <PopoverTrigger asChild>
@@ -165,7 +186,7 @@ export default function AddExpenseForm() {
                     name="amount"
                     render={({ field }) => (
                         <FormItem data-aos="fade-left">
-                            <FormLabel>Amount (₹)</FormLabel>
+                            <FormLabel>Amount ($)</FormLabel>
                             <FormControl>
                                 <Input
                                     placeholder="0.00"
@@ -183,23 +204,26 @@ export default function AddExpenseForm() {
                 />
             </div>
 
-            <div  className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2">
                 <FormField
                     control={form.control}
                     name="category"
-                    render={({ field }) => (
+                    render={({ field, fieldState }) => (
                         <FormItem data-aos="fade-right">
                             <FormLabel>Category</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select key={field.value}
+                                value={field.value}
+                                defaultValue={field.value}
+                                onValueChange={field.onChange}>
                                 <FormControl>
-                                    <SelectTrigger>
+                                    <SelectTrigger ref={field.ref} aria-invalid={fieldState['invalid']}>
                                         <SelectValue placeholder="Select a category" />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                    {expenseCategories.map((category) => (
-                                        <SelectItem key={category.value} value={category.value}>
-                                            {category.label}
+                                    {categories.map((category) => (
+                                        <SelectItem key={category.id} value={category.id!}>
+                                            {category.name}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -211,16 +235,19 @@ export default function AddExpenseForm() {
                         </FormItem>
                     )}
                 />
-
                 <FormField
                     control={form.control}
-                    name="paymentMethod"
-                    render={({ field }) => (
+                    name="payment"
+                    render={({ field, fieldState }) => (
                         <FormItem data-aos="fade-left">
                             <FormLabel>Payment Method</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select
+                                key={field.value}
+                                value={field.value}
+                                defaultValue={field.value}
+                                onValueChange={field.onChange}>
                                 <FormControl>
-                                    <SelectTrigger>
+                                    <SelectTrigger ref={field.ref} aria-invalid={fieldState['invalid']}>
                                         <SelectValue placeholder="Select payment method" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -242,43 +269,43 @@ export default function AddExpenseForm() {
             </div>
 
             <div className="space-y-6" data-aos="fade-up">
-            <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Description</FormLabel>
-                        <FormControl>
-                            <Input placeholder="What did you spend on?" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                            A brief description of the expense.
-                        </FormDescription>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+                <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Description</FormLabel>
+                            <FormControl>
+                                <Input placeholder="What did you spend on?" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                                A brief description of the expense.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
-            <FormField
-                control={form.control}
-                name="notes"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Notes (Optional)</FormLabel>
-                        <FormControl>
-                            <Textarea
-                                placeholder="Add any additional details..."
-                                className="min-h-[100px]"
-                                {...field}
-                            />
-                        </FormControl>
-                        <FormDescription>
-                            Any additional information you want to add.
-                        </FormDescription>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+                <FormField
+                    control={form.control}
+                    name="notes"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Notes (Optional)</FormLabel>
+                            <FormControl>
+                                <Textarea
+                                    placeholder="Add any additional details..."
+                                    className="min-h-[100px]"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormDescription>
+                                Any additional information you want to add.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
             </div>
 
             <div className="flex justify-end gap-2">
@@ -289,8 +316,8 @@ export default function AddExpenseForm() {
                 >
                     Cancel
                 </Button>
-                <Button type="submit" className="bg-expense-500 hover:bg-expense-800 text-white">
-                    Add Expense
+                <Button disabled={isExecuting} type="submit" className="bg-expense-500 hover:bg-expense-800 text-white">
+                    Save
                 </Button>
             </div>
         </form>

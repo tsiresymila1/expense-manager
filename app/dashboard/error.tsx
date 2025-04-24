@@ -11,7 +11,7 @@ export default function ErrorPage({
     reset: () => void
 }) {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
+        <div className="flex flex-col items-center justify-center bg-background px-4">
             <div className="text-center justify-center flex flex-col">
                 <h1 data-aos="fade-down" className="text-7xl font-bold text-expense-500 mb-4">500</h1>
                 <p data-aos="zoom-in" className="text-2xl font-semibold mb-6">Something went wrong!</p>

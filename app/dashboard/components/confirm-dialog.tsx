@@ -13,14 +13,10 @@ type ConfirmDialogProps = {
 
 export default function ConfirmDialog({ title, message, children, onConfirm }: ConfirmDialogProps) {
     const [open, setOpen] = useState(false);
-
     const onConfirmClicked = () => {
         setOpen(false)
         onConfirm?.()
     }
-
-
-
     return <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
             {children}
@@ -34,7 +30,7 @@ export default function ConfirmDialog({ title, message, children, onConfirm }: C
                 <Button onClick={() => setOpen(false)} variant="destructive">
                     <Label className="">Cancel</Label>
                 </Button>
-                <Button onClick={onConfirmClicked} >
+                <Button className="bg-expense-500 hover:bg-expense-600 text-white" onClick={onConfirmClicked} >
                     <Label className="">Confirm</Label>
                 </Button>
             </DialogFooter>
