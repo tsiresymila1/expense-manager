@@ -17,12 +17,12 @@ import SearchExpense from "./components/search-input";
 export default function AdminExpenses({ searchParams }: ParamsProps<{ page?: string, query?: string }>) {
     return (
         <div className="gap-y-6 pb-12 flex flex-col">
-            <div className="flex items-center justify-between">
-                <div data-aos="fade-right" >
+            <div className="flex flex-col gap-4 lg:flex-row items-center justify-between w-full">
+                <div data-aos="fade-right" className="flex-col lg:flex-1 w-full flex" >
                     <h1 className="text-2xl font-bold tracking-tight ">Expenses</h1>
                     <p className="text-muted-foreground">Manage and track your expenses.</p>
                 </div>
-                <div data-aos="fade-left" className="flex gap-2">
+                <div data-aos="fade-left" className="flex gap-2 lg:flex-1 justify-evenly lg:justify-end w-full">
                     <ExportButton />
                     <Button asChild className="bg-expense-500 hover:bg-expense-800 text-white">
                         <Link href="/dashboard/expense/add">

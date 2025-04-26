@@ -6,7 +6,8 @@ export default function Aos() {
     useEffect(() => {
         AOS.init({
             duration: 1400,
-            // easing: "ease-in-out-cubic"
+            // easing: "ease-in-out-cubic",
+        
         });
     }, [])
     return <></>

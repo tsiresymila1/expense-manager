@@ -15,7 +15,7 @@ const HeroSection = () => {
             <p data-aos="zoom-in" className="text-lg md:text-xl mb-8 text-muted-foreground max-w-xl">
               Take control of your finances with ExpenseFlow – the all-in-one expense tracking solution that helps you save more, spend wisely, and achieve your financial goals.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-center lg:items-start">
               <Link href="/dashboard">
                 <Button size="lg" data-aos="fade-left" className="text-base bg-home text-white hover:bg-home/80">
                   Get Started
@@ -48,7 +48,7 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="order-2 lg:order-2 flex justify-center">
-            <div className=" bg-radial from-expense-400 to-transparent rounded-full w-[500px] h-[500px] absolute -top-10 -left-10 opacity-20"></div>
+            <div className=" bg-radial from-expense-400 to-transparent rounded-full w-full lg:w-[500px] h-[500px] absolute -top-10 -left-10 opacity-20"></div>
             <div data-aos="fade-right" className="relative z-10 bg-card border shadow-lg rounded-xl p-4  max-w-md w-full animate-float">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">

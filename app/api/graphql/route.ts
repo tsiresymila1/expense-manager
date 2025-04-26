@@ -1,27 +1,27 @@
 import prisma from "@/lib/prisma";
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import { createSyncSchema } from "./schema";
 import { NextRequest } from "next/server";
+import { ContextType } from "./decorator";
+import { createSyncSchema } from "./schema";
 
-export type Context = {
-  prisma: typeof prisma;
-};
-
-const apolloServer = new ApolloServer<Context>({
+const apolloServer = new ApolloServer<ContextType>({
   schema: createSyncSchema(),
   introspection: true,
-  nodeEnv: "development"
+  nodeEnv: "development",
 });
 
-const handler = startServerAndCreateNextHandler(apolloServer, {
-  context: async (req, res) => ({ req, res, prisma }),
-});
+const handler = startServerAndCreateNextHandler<NextRequest, ContextType>(
+  apolloServer,
+  {
+    context: async (req, res) => ({ req, res, prisma }),
+  }
+);
 
 export function GET(req: NextRequest) {
-    return handler(req)
+  return handler(req);
 }
 
 export function POST(req: NextRequest) {
-    return handler(req)
+  return handler(req);
 }

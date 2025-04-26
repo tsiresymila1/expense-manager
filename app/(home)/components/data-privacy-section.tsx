@@ -50,12 +50,12 @@ const DataPrivacySection = () => {
             </div>
             <div  className="mt-10">
               <Link href="/privacy-policy">
-                <Button data-aos="fade-right" variant="outline" size="lg" className="mr-4">
+                <Button data-aos="fade-down" variant="outline" size="lg" className="mr-4">
                   Read Privacy Policy
                 </Button>
               </Link>
               <Link href="/terms">
-                <Button  data-aos="fade-left" data-aos-delay="300" variant="ghost" size="lg">
+                <Button  data-aos="fade-up" data-aos-delay="300" variant="ghost" size="lg">
                   Terms of Service
                 </Button>
               </Link>

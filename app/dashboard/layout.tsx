@@ -21,7 +21,7 @@ export default function AppLayout({
             <AppSidebar />
             <main className="w-full flex flex-col gap-4 relative h-screen overflow-hidden">
                 <AppBar />
-                <ScrollArea className="w-full flex flex-col relative px-12 pt-6 overflow-auto">
+                <ScrollArea className="w-full flex flex-col relative px-4 lg:px-12 pt-6 overflow-auto">
                     <AppBreadcrumb />
                     {children}
                 </ScrollArea>

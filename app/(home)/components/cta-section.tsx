@@ -16,12 +16,12 @@ const CTASection = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/dashboard">
-            <Button size="lg" data-aos="fade-right" className="bg-white text-expense-700 hover:bg-white/90">
+            <Button size="lg" data-aos="fade-up" className="bg-white text-expense-700 hover:bg-white/90">
               Start For Free
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-          <Button data-aos="fade-left" variant="outline" size="lg" className="bg-transparent text-white hover:bg-white/80 hover:text-expense-700">
+          <Button data-aos="fade-down" variant="outline" size="lg" className="bg-transparent text-white hover:bg-white/80 hover:text-expense-700">
             Learn More
           </Button>
         </div>
