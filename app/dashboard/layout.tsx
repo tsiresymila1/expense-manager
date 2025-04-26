@@ -17,15 +17,15 @@ export default function AppLayout({
     children: React.ReactNode;
 }>) {
     return (
-            <SidebarProvider>
-                <AppSidebar />
-                <main className="w-full flex flex-col gap-4 relative h-screen overflow-hidden">
-                    <AppBar />
-                    <ScrollArea className="w-full flex flex-col relative px-12 pt-6 overflow-auto">
-                        <AppBreadcrumb />
-                        {children}
-                    </ScrollArea>
-                </main>
-            </SidebarProvider>
+        <SidebarProvider>
+            <AppSidebar />
+            <main className="w-full flex flex-col gap-4 relative h-screen overflow-hidden">
+                <AppBar />
+                <ScrollArea className="w-full flex flex-col relative px-12 pt-6 overflow-auto">
+                    <AppBreadcrumb />
+                    {children}
+                </ScrollArea>
+            </main>
+        </SidebarProvider>
     );
 }

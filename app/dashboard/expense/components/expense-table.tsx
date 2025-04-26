@@ -113,7 +113,7 @@ export default async function ExpenseTable({ params }: ParamsProps<{ page?: stri
                     {items.length == 0 ? <TableRow>
                         <TableCell colSpan={6}>
                             <div className="flex justify-center py-3 border-b">
-                                <Label className="text-center items-center text-expense-500 font-bold text-lg">Aucun element</Label>
+                                <Label className="text-center items-center text-expense-500 font-bold text-lg">No element</Label>
                             </div>
                         </TableCell>
                     </TableRow> : null}

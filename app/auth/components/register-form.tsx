@@ -1,5 +1,6 @@
 "use client";
 
+import { addActivity } from "@/app/actions/activity";
 import FormError from "@/components/form-error";
 import FormSuccess from "@/components/form-success";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, Loader } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -59,6 +61,8 @@ export default function RegisterForm() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    const { executeAsync } = useAction(addActivity)
+
     const onSubmit = async (data: RegisterInput) => {
         setLoading(true);
         try {
@@ -80,6 +84,9 @@ export default function RegisterForm() {
             } else {
                 setSuccess("Logged")
                 router.push("/dashboard");
+                await executeAsync({
+                    action: `User '${data.name}' created.`,
+                })
             }
         } finally {
             setLoading(false);

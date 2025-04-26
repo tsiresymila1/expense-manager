@@ -16,11 +16,12 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  expenses   Expense[]
-  categories Category[]
-
-  sessions Session[]
-  accounts Account[]
+  expenses      Expense[]
+  categories    Category[]
+  sessions      Session[]
+  accounts      Account[]
+  Setting       Setting[]
+  activityLogs  ActivityLog[]
 
   @@map("user")
 }
@@ -113,4 +114,30 @@ model Jwks {
   createdAt  DateTime
 
   @@map("jwks")
+}
+
+model Setting {
+  id    String  @id @default(cuid())
+  key   String
+  value String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([key])
+  @@map("setting")
+}
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  action      String
+  description String?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("activity_log")
 }

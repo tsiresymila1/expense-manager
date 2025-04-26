@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { formatDate } from "date-fns";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { createActivity } from "../activity";
 import { securedSafeAction } from "../expense-safe-action";
 
 const upsertSchema = z.object({
@@ -25,7 +26,6 @@ export const upsertExpense = securedSafeAction
       parsedInput: { id, amount, category, notes, date, payment, description },
       ctx,
     }) => {
-      console.log("category::", category);
       await prisma.expense.upsert({
         where: { id: id || "___" },
         create: {
@@ -63,6 +63,10 @@ export const upsertExpense = securedSafeAction
           },
         },
       });
+      await createActivity(
+        `Expense '${description}' ${id ? "updated" : "created"}.`,
+        ctx.user.id
+      );
       revalidatePath("/dashboard/expense");
       return { success: "Expense created" };
     }
@@ -79,12 +83,16 @@ export const deleteExpense = securedSafeAction
   })
   .action<{ success?: string; error?: string }>(
     async ({ parsedInput: { id }, ctx }) => {
-      await prisma.expense.delete({
+      const exp = await prisma.expense.delete({
         where: {
           id,
           userId: ctx.user.id,
         },
       });
+      await createActivity(
+        `Expense '${exp.description}' deleted.`,
+        ctx.user.id
+      );
       revalidatePath("/dashboard/expense");
       return { success: "Expense deleted" };
     }

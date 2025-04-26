@@ -1,5 +1,5 @@
 "use client"
-import { BarChart3, ChartArea, DollarSign, HelpCircle, LayoutDashboard, LucideIcon, Settings, Type, Users2 } from "lucide-react"
+import { BarChart3, ChartArea, DollarSign, LayoutDashboard, LucideIcon, Settings, Type } from "lucide-react"
 
 import { Label } from "@/components/ui/label"
 import {
@@ -49,11 +49,11 @@ const items: SideMenuType[] = [
                 url: "/category",
                 icon: Type,
             },
-            {
-                title: "Users",
-                url: "/users",
-                icon: Users2,
-            },
+            // {
+            //     title: "Users",
+            //     url: "/users",
+            //     icon: Users2,
+            // },
 
             {
                 title: "Activity",
@@ -71,11 +71,11 @@ const items: SideMenuType[] = [
                 url: "/settings",
                 icon: Settings,
             },
-            {
-                title: "Help",
-                url: "/help",
-                icon: HelpCircle,
-            }
+            // {
+            //     title: "Help",
+            //     url: "/help",
+            //     icon: HelpCircle,
+            // }
         ]
     },
 ]

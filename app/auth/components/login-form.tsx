@@ -1,5 +1,6 @@
 "use client";
 
+import { addActivity } from "@/app/actions/activity";
 import FormError from "@/components/form-error";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, Loader } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -39,6 +41,7 @@ export default function LoginForm() {
     });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+    const { executeAsync } = useAction(addActivity)
 
     const onSubmit = async (data: z.infer<typeof schema>) => {
         setLoading(true);
@@ -51,6 +54,10 @@ export default function LoginForm() {
             if (res?.error) {
                 toast.error("Invalid credentials", {
                     description: `${res.error.message}`
+                })
+            } else {
+                await executeAsync({
+                    action: "User logged."
                 })
             }
         }

@@ -2,6 +2,7 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { createActivity } from "../activity";
 import { securedSafeAction } from "../expense-safe-action";
 
 const createSchema = z.object({
@@ -24,7 +25,7 @@ export const upsertCategory = securedSafeAction
           name,
           value,
           description,
-          userId: ctx.user.id,
+          userId: ctx.user.id, 
         },
         update: {
           name,
@@ -32,6 +33,10 @@ export const upsertCategory = securedSafeAction
           description,
         },
       });
+      await createActivity(
+        `Category '${name}' ${id ? "updated" : "created"}.`,
+        ctx.user.id
+      );
       revalidatePath("/dashboard/category");
       return { success: "Category created" };
     }
@@ -48,12 +53,13 @@ export const deleteCategory = securedSafeAction
   })
   .action<{ success?: string; error?: string }>(
     async ({ parsedInput: { id }, ctx }) => {
-      await prisma.category.delete({
+      const cat = await prisma.category.delete({
         where: {
           id,
           userId: ctx.user.id,
         },
       });
+      await createActivity(`Category '${cat.name}' deleted.`, ctx.user.id);
       revalidatePath("/dashboard/category");
       return { success: "Category deleted" };
     }

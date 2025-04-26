@@ -54,7 +54,7 @@ export default async function CategoryTable({ searchParams }: { searchParams: Pr
                 {items.length == 0 ? <TableRow>
                     <TableCell colSpan={4}>
                         <div className="flex justify-center py-3 border-b">
-                            <Label className="text-center items-center text-expense-500 font-bold text-lg">Aucun element</Label>
+                            <Label className="text-center items-center text-expense-500 font-bold text-lg">No element</Label>
                         </div>
                     </TableCell>
                 </TableRow> : null}

@@ -6,9 +6,12 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import github from '@/assets/logos/github.png'
+import { addActivity } from "@/app/actions/activity";
+import { useAction } from "next-safe-action/hooks";
 
 export default function GithubAuthButton() {
     const [loading, setLoading] = useState<boolean>(false)
+    const { executeAsync } = useAction(addActivity)
     return <div className="w-full flex items-center justify-between">
         <Button
             variant="outline"
@@ -22,6 +25,9 @@ export default function GithubAuthButton() {
                         provider: "github",
                     })
                     if (res.data?.url) {
+                        await executeAsync({
+                            action: "User logger via github."
+                        })
                         redirect(res.data.url)
                     } else {
                         throw new Error("Something went wrong");
