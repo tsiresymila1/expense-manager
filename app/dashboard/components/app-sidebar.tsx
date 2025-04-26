@@ -103,10 +103,10 @@ export function AppSidebar() {
                                     return (<SidebarMenuItem key={`item-${index}-${index2}`} className="my-1">
                                         <SidebarMenuButton asChild
                                             className={cn('"py-2 hover:bg-expense-500/10', pathname === url ? 'bg-expense-500/10' : '')}>
-                                            <a href={url} className="flex gap-5">
+                                            <Link href={url} className="flex gap-5">
                                                 <menu.icon />
                                                 <span>{menu.title}</span>
-                                            </a>
+                                            </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>)
                                 })}
