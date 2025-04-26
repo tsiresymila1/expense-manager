@@ -112,7 +112,7 @@ export default function LoginForm() {
                                             }
                                             return checked;
                                         }} />
-                                        <div className="text-sm">I agree the <a href="/privacy-policy" className="text-expense-600">Privacy Policy</a> and <a href="/terms" className="text-expense-600">Terms of Service</a>
+                                        <div className="text-sm">I agree the <Link href="/privacy-policy" className="text-expense-600">Privacy Policy</Link> and <Link href="/terms" className="text-expense-600">Terms of Service</Link>
                                         </div>
                                     </div>
                                     {errors.cgu && <FormError>{errors.cgu.message}</FormError>}

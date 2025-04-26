@@ -16,18 +16,18 @@ const Footer = () => {
               Simplify your finances with intelligent expense tracking and budgeting tools.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
+              <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
                 <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
                 <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">
                 <Linkedin className="h-5 w-5" />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -41,10 +41,10 @@ const Footer = () => {
                 <Link href="/pricing" className="text-muted-foreground hover:text-expense-500 transition-colors">Pricing</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Mobile App</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Mobile App</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Integrations</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Integrations</Link>
               </li>
             </ul>
           </div>
@@ -53,16 +53,16 @@ const Footer = () => {
             <h3 className="font-semibold text-lg mb-4">Resources</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Help Center</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Help Center</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Blog</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Blog</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Community</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Community</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Roadmap</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Roadmap</Link>
               </li>
             </ul>
           </div>
@@ -71,10 +71,10 @@ const Footer = () => {
             <h3 className="font-semibold text-lg mb-4">Company</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">About Us</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">About Us</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Careers</a>
+                <Link href="#" className="text-muted-foreground hover:text-expense-500 transition-colors">Careers</Link>
               </li>
               <li>
                 <Link href="/privacy-policy" className="text-muted-foreground hover:text-expense-500 transition-colors">Privacy Policy</Link>
