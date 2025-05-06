@@ -24,7 +24,7 @@ export default function AdminDashboard() {
 
             {/* Expense Breakdown */}
             <div className="grid grid-cols-1 lg:grid lg:grid-cols-2 gap-8">
-                <Card  className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
+                <Card data-aos="fade-up" className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader>
                         <CardTitle>Expense Breakdown</CardTitle>
                         <CardDescription>
@@ -35,7 +35,7 @@ export default function AdminDashboard() {
                         <ExpensePerCategory />
                     </CardContent>
                 </Card>
-                <Card  className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
+                <Card data-aos="fade-up"  className="col-span-1 bg-transparent rounded-lg border border-expense-100/80 dark:border-expense-900/80 shadow-sm">
                     <CardHeader>
                         <CardTitle>Monthly Trend</CardTitle>
                         <CardDescription>
