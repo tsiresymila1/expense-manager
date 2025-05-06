@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import prisma from "@/lib/prisma";
+import { endOfMonth, startOfMonth } from "date-fns";
 import { TrendingUp } from "lucide-react";
-import { startOfMonth, endOfMonth } from "date-fns";
 
-export default async function HighestCategory({ selectedMonth }: { selectedMonth?: Date }) {
+export async function getHighestCategory(p: typeof prisma, selectedMonth?: Date) {
     const currentMonth = selectedMonth || new Date();
     const startDate = startOfMonth(currentMonth);
     const endDate = endOfMonth(currentMonth);
@@ -38,7 +38,11 @@ export default async function HighestCategory({ selectedMonth }: { selectedMonth
     const percentage = totalExpenses
         ? ((highestCategory.totalAmount / totalExpenses) * 100).toFixed(2)
         : 0;
+    return { highestCategory, percentage };
+}
 
+export default async function HighestCategory({ selectedMonth }: { selectedMonth?: Date }) {
+    const { highestCategory, percentage } = await getHighestCategory(prisma, selectedMonth);
     return (
         <Card
             data-aos="flip-left"

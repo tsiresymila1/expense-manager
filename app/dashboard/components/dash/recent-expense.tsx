@@ -40,7 +40,7 @@ export default async function RecentExpense() {
                 <CreditCard className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-                <div className="text-2xl font-bold text-expense-500">{currency}{recent?.amount}</div>
+                <div className="text-2xl font-bold text-expense-500">{currency}{recent?.amount ?? '0.00'}</div>
                 <p className="text-xs text-muted-foreground">
                     {recent?.category.name} - {formatDate(recent?.date)}
                 </p>

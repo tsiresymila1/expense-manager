@@ -2,8 +2,7 @@ import prisma from "@/lib/prisma";
 import { endOfMonth, startOfMonth } from "date-fns";
 import { getCurrency } from "../currency-provider";
 
-export default async function ExpensePerCategory({ selectedMonth, topN = 4 }: { selectedMonth?: Date; topN?: number }) {
-    const currency = await getCurrency();
+export async function getCategoryStats(p: typeof prisma, selectedMonth?: Date, topN: number = 4 ) {
     const currentMonth = selectedMonth || new Date();
     const startDate = startOfMonth(currentMonth);
     const endDate = endOfMonth(currentMonth);
@@ -22,15 +21,12 @@ export default async function ExpensePerCategory({ selectedMonth, topN = 4 }: { 
             },
         },
     });
-
     const categoryStats = perCategory.map((category) => {
         const totalAmount = category.expenses.reduce((sum, expense) => sum + expense.amount, 0);
         return { name: category.name, totalAmount };
     });
-
     // Sort categories by totalAmount in descending order
     categoryStats.sort((a, b) => b.totalAmount - a.totalAmount);
-
     // Take the top N categories and combine the rest into "Other"
     const topCategories = categoryStats.slice(0, topN);
     const otherCategories = categoryStats.slice(topN);
@@ -46,7 +42,12 @@ export default async function ExpensePerCategory({ selectedMonth, topN = 4 }: { 
         ...category,
         percentage: totalExpenses ? ((category.totalAmount / totalExpenses) * 100).toFixed(2) : "0",
     }));
+    return { categoryStatsWithPercentage, totalExpenses };
+}
 
+export default async function ExpensePerCategory({ selectedMonth, topN = 4 }: { selectedMonth?: Date; topN?: number }) {
+    const currency = await getCurrency();
+    const { categoryStatsWithPercentage } = await getCategoryStats(prisma, selectedMonth, topN);
     return (
         <div className="space-y-4">
             {categoryStatsWithPercentage.map((category) => (

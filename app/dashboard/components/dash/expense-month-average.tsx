@@ -3,9 +3,8 @@ import prisma from "@/lib/prisma";
 import { BarChart3 } from "lucide-react";
 import { getCurrency } from "../currency-provider";
 
-export default async function ExpenseMonthAverage() {
-    const currency = await getCurrency();
-    const expenses = await prisma.expense.findMany({
+export async function getMountAverage(p: typeof prisma) {
+    const expenses = await p.expense.findMany({
         select: {
             date: true,
             amount: true,
@@ -49,6 +48,19 @@ export default async function ExpenseMonthAverage() {
     const percentageChange = previousMonthAvg
         ? ((currentMonthAvg - previousMonthAvg) / previousMonthAvg) * 100
         : 0;
+
+    return {
+        currentMonthAvg,
+        previousMonthAvg,
+        percentageChange,
+        currentMonthData,
+        previousMonthData,
+    }
+}
+
+export default async function ExpenseMonthAverage() {
+    const currency = await getCurrency();
+    const { currentMonthAvg, percentageChange } = await getMountAverage(prisma);
 
     return (
         <Card

@@ -87,9 +87,10 @@ type FormValues = z.infer<typeof formSchema>;
 type Props = {
     categories: MinCategory[],
     expense?: MinExpense | null
+    currency?: string | null
 }
 
-export default function AddExpenseForm({ categories, expense }: Props) {
+export default function AddExpenseForm({ categories, expense, currency }: Props) {
     const navigate = useRouter();
     const { executeAsync, isExecuting, isPending } = useAction(upsertExpense)
     const form = useForm<FormValues>({
@@ -186,7 +187,7 @@ export default function AddExpenseForm({ categories, expense }: Props) {
                     name="amount"
                     render={({ field }) => (
                         <FormItem data-aos="fade-left">
-                            <FormLabel>Amount ($)</FormLabel>
+                            <FormLabel>Amount ({currency})</FormLabel>
                             <FormControl>
                                 <Input
                                     placeholder="0.00"
@@ -317,7 +318,7 @@ export default function AddExpenseForm({ categories, expense }: Props) {
                     Cancel
                 </Button>
                 <Button disabled={isExecuting || isPending} type="submit" className="bg-expense-500 hover:bg-expense-800 text-white">
-                   {isExecuting || isPending ? <Loader className="animate-spin" />: null} Save
+                    {isExecuting || isPending ? <Loader className="animate-spin" /> : null} Save
                 </Button>
             </div>
         </form>

@@ -18,3 +18,25 @@ export function CurrentUser() {
     }
   );
 }
+
+export function PrismaDb() {
+  return createParameterDecorator<ContextType>(
+    async ({ context }): Promise<typeof prisma | undefined> => {
+      return context.prisma;
+    }
+  );
+}
+
+export function Currency() {
+  return createParameterDecorator<ContextType>(
+    async ({ context }): Promise<string | null> => {
+      const currency = await context.prisma.setting.findUnique({
+        where: {
+          userId: context.user?.id,
+          key: `${context.user?.id}_currency_symbol`,
+        },
+      });
+      return currency?.value ?? "$";
+    }
+  );
+}

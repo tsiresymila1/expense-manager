@@ -2,9 +2,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import AddExpenseForm from "./components/add-expense-form";
 import prisma from "@/lib/prisma";
 import { getUser } from "@/app/actions/get-user";
+import { getCurrency } from "../../components/currency-provider";
 
 export default async  function ExpenseAddPage() {
     const user = await getUser()
+    const currency = await getCurrency()
     const data = await prisma.category.findMany({
         where: {
             userId: user?.id
@@ -24,7 +26,7 @@ export default async  function ExpenseAddPage() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <AddExpenseForm categories={data} />
+                    <AddExpenseForm categories={data} currency={currency} />
                 </CardContent>
             </Card>
         </div>

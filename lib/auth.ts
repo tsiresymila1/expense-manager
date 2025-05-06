@@ -1,3 +1,4 @@
+import { expo } from "@better-auth/expo";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
@@ -9,6 +10,7 @@ export const auth = betterAuth({
     cookiePrefix: "expense-manager",
     // useSecureCookies: true
   },
+  trustedOrigins: ["*"], 
   emailAndPassword: {
     enabled: true,
     password: {
@@ -42,5 +44,6 @@ export const auth = betterAuth({
         expirationTime: "7d",
       },
     }),
+    expo(),
   ],
 });

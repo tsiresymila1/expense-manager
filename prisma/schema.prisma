@@ -2,6 +2,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../app/api/graphql/_generated_prisma"
+  formatGeneratedCode = "prettier"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -16,12 +22,12 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  expenses      Expense[]
-  categories    Category[]
-  sessions      Session[]
-  accounts      Account[]
-  Setting       Setting[]
-  activityLogs  ActivityLog[]
+  expenses     Expense[]
+  categories   Category[]
+  sessions     Session[]
+  accounts     Account[]
+  Setting      Setting[]
+  activityLogs ActivityLog[]
 
   @@map("user")
 }

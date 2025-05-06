@@ -7,13 +7,13 @@ function calculatePercentageChange(current: number, previous: number): number {
     return change;
 }
 
-export default async function ExpenseMonthTrending() {
+export async function getCurrentMonthExpensesTranding(p: typeof prisma) {
     const currentMonth = new Date();
     const previousMonth = new Date();
     previousMonth.setMonth(currentMonth.getMonth() - 1);
 
 
-    const currentMonthExpenses = await prisma.expense.aggregate({
+    const currentMonthExpenses = await p.expense.aggregate({
         _sum: { amount: true },
         where: {
             date: {
@@ -23,7 +23,7 @@ export default async function ExpenseMonthTrending() {
         },
     });
 
-    const previousMonthExpenses = await prisma.expense.aggregate({
+    const previousMonthExpenses = await p.expense.aggregate({
         _sum: { amount: true },
         where: {
             date: {
@@ -35,8 +35,14 @@ export default async function ExpenseMonthTrending() {
 
     const currentTotal = currentMonthExpenses._sum.amount || 0;
     const previousTotal = previousMonthExpenses._sum.amount || 0;
-    console.log("currentTotal:", currentTotal, 'previousTotal:', previousTotal)
     const percentageChange = calculatePercentageChange(currentTotal, previousTotal);
+    return { currentTotal, previousTotal, percentageChange };
+}
+
+export default async function ExpenseMonthTrending() {
+
+    const { percentageChange } = await getCurrentMonthExpensesTranding(prisma);
+
     return <div className="text-center">
         {percentageChange > 0 ? <TrendingUp className="mx-auto h-16 w-16 text-red-600" /> : <TrendingDown className="mx-auto h-16 w-16 text-expense-500" />}
         <p className="mt-2 text-sm text-muted-foreground">Your spending has {percentageChange > 0 ? 'decreased' : 'increased'} by {Math.abs(percentageChange).toFixed(1)}% compared to last month</p>

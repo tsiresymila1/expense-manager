@@ -1,0 +1,15 @@
+export { AggregateExpenseArgs } from "./AggregateExpenseArgs";
+export { CreateManyAndReturnExpenseArgs } from "./CreateManyAndReturnExpenseArgs";
+export { CreateManyExpenseArgs } from "./CreateManyExpenseArgs";
+export { CreateOneExpenseArgs } from "./CreateOneExpenseArgs";
+export { DeleteManyExpenseArgs } from "./DeleteManyExpenseArgs";
+export { DeleteOneExpenseArgs } from "./DeleteOneExpenseArgs";
+export { FindFirstExpenseArgs } from "./FindFirstExpenseArgs";
+export { FindFirstExpenseOrThrowArgs } from "./FindFirstExpenseOrThrowArgs";
+export { FindManyExpenseArgs } from "./FindManyExpenseArgs";
+export { FindUniqueExpenseArgs } from "./FindUniqueExpenseArgs";
+export { FindUniqueExpenseOrThrowArgs } from "./FindUniqueExpenseOrThrowArgs";
+export { GroupByExpenseArgs } from "./GroupByExpenseArgs";
+export { UpdateManyExpenseArgs } from "./UpdateManyExpenseArgs";
+export { UpdateOneExpenseArgs } from "./UpdateOneExpenseArgs";
+export { UpsertOneExpenseArgs } from "./UpsertOneExpenseArgs";

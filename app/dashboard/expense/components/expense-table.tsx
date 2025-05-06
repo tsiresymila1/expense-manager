@@ -12,8 +12,10 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Pagination } from "../../components/pagination";
 import ExpenseDeleteButton from "./delete-button";
+import { getCurrency } from "../../components/currency-provider";
 
 export default async function ExpenseTable({ params }: ParamsProps<{ page?: string, query?: string }>) {
+    const currency = await getCurrency()
     const { page, query } = await params!
     console.log(`query::'${query}'`)
     const user = await getUser()
@@ -87,7 +89,7 @@ export default async function ExpenseTable({ params }: ParamsProps<{ page?: stri
                                 </div>
                             </TableCell>
                             <TableCell className="text-center font-medium">
-                                ${expense.amount}
+                                {currency}{expense.amount}
                             </TableCell>
                             <TableCell>{expense.description}</TableCell>
                             <TableCell>{formatDate(expense.date, 'dd/MM/y')}</TableCell>
