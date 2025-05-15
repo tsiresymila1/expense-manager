@@ -5,9 +5,9 @@ import { AuthCheckerInterface, ResolverData } from "type-graphql";
 import { ContextType } from "./decorator";
 
 export async function decodePayload(token: string) {
-  const JWKS = await auth.api.getJwks();
-  const keyStore = createLocalJWKSet(JWKS);
   try {
+    const JWKS = await auth.api.getJwks();
+    const keyStore = createLocalJWKSet(JWKS);
     const { payload } = await jwtVerify(token, keyStore, {
       algorithms: ["RS256"],
     });
@@ -31,6 +31,17 @@ export class CustomAuthChecker implements AuthCheckerInterface<ContextType> {
       context.user = user;
       return true;
     }
+    const session = await auth.api.getSession(context.req);
+    if (session && session.user) {
+      context.user = await prisma.user.findUnique({
+        where: {
+          id: session.user.id,
+        },
+      });
+      console.log("session", context.user);
+      return true;
+    }
+
     return false;
   }
 }

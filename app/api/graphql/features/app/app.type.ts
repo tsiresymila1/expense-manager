@@ -63,8 +63,8 @@ class CategoryStat {
   @Field(() => String)
   declare name: string;
 
-  @Field(() => String)
-  declare percentage: string;
+  @Field(() => Float)
+  declare percentage: number;
 
   @Field(() => Float)
   declare totalAmount: number;

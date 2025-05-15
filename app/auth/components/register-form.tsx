@@ -22,8 +22,6 @@ import * as z from "zod";
 import GithubAuthButton from "./github-auth";
 import GoogleAuthButton from "./google-auth";
 
-export type RegisterInput = { name: string; email: string; password: string };
-
 const schema = z.object({
     name: z.string(),
     email: z.string().email("Invalid email"),
@@ -52,7 +50,7 @@ export default function RegisterForm() {
         handleSubmit,
         formState: { errors },
         setValue
-    } = useForm({
+    } = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
     });
 
@@ -63,7 +61,7 @@ export default function RegisterForm() {
 
     const { executeAsync } = useAction(addActivity)
 
-    const onSubmit = async (data: RegisterInput) => {
+    const onSubmit = async (data: z.infer<typeof schema>) => {
         setLoading(true);
         try {
             const res = await authClient.signUp.email({

@@ -36,7 +36,7 @@ export default function LoginForm() {
         handleSubmit,
         formState: { errors },
         setValue
-    } = useForm({
+    } = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
     });
     const [showPassword, setShowPassword] = useState(false);

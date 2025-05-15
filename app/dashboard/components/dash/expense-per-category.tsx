@@ -40,7 +40,7 @@ export async function getCategoryStats(p: typeof prisma, selectedMonth?: Date, t
 
     const categoryStatsWithPercentage = topCategories.map((category) => ({
         ...category,
-        percentage: totalExpenses ? ((category.totalAmount / totalExpenses) * 100).toFixed(2) : "0",
+        percentage: totalExpenses ? ((category.totalAmount / totalExpenses) * 100) : 0,
     }));
     return { categoryStatsWithPercentage, totalExpenses };
 }
@@ -59,13 +59,13 @@ export default async function ExpensePerCategory({ selectedMonth, topN = 4 }: { 
                         <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
                             <div
                                 className="h-full bg-expense-500"
-                                style={{ width: `${category.percentage}%` }}
+                                style={{ width: `${category.percentage.toFixed(2)}%` }}
                             />
                         </div>
                     </div>
                     <div className="w-1/4 text-right">
                         <p className="text-sm font-medium">{currency}{category.totalAmount}</p>
-                        <p className="text-xs text-muted-foreground">{category.percentage}%</p>
+                        <p className="text-xs text-muted-foreground">{category.percentage.toFixed(2)}%</p>
                     </div>
                 </div>
             ))}

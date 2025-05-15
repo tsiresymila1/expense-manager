@@ -37,12 +37,22 @@ export class CategoryResolver {
     @PrismaDb() prisma: PrismaClient,
     @CurrentUser() user: User
   ) {
+    console.log("user", user);
     return await prisma.category.findMany({
       where: {
         userId: user?.id ?? "___",
       },
+      include: {
+        user: true,
+        _count: {
+          select: {
+            expenses: true
+          }
+        }
+      },
     });
   }
+
   @Mutation(() => Boolean)
   async deleteCategory(
     @Arg("id") id: string,
